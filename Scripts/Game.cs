@@ -28,5 +28,14 @@ namespace GT
 
         public int GetGoldenTime() { return _goldenTime.Get(); }
         public void ModifyGoldenTime(int delta) { _goldenTime.Modify(delta); }
+
+        public IEvent GenerateEvent()
+        {
+            IEvent regularEvent = _eventFactory.CreateDailyEvent();
+            IEvent deathEvent = _eventFactory.CreateDeathEvent();
+
+            // if an active random death event does get generated then it must happen
+            return deathEvent.WillHappen() ? deathEvent : regularEvent;
+        }
     }
 }

@@ -1,3 +1,5 @@
+using GT.Events.Concrete;
+
 namespace GT.Events
 {
     /**
@@ -8,16 +10,29 @@ namespace GT.Events
      */
     public class EventFactory
     {
-        private Random _rng;
+        private readonly Random _rng;
 
         public EventFactory(Random rng)
         {
             _rng = rng;
         }
         
-        public IEvent CreateEvent()
+        public IEvent CreateDailyEvent()
         {
-            throw new NotImplementedException();
+            // this is how we decide which event to produce
+            int randomNumber = _rng.Next(0, 100);
+
+            // I can't think of a more elegant generation method
+            if (randomNumber < 25) return new NoLunchEvent(_rng);
+            if (randomNumber < 50) return new BullyEvent(_rng);
+            if (randomNumber < 75) return new RainyDayEvent(_rng);
+            // randomNumber < 100:
+            return new RoutineBagCheckEvent(_rng);
+        }
+
+        public IEvent CreateDeathEvent()
+        {
+            return new RandomDeathEvent(_rng);
         }
     }
 }
