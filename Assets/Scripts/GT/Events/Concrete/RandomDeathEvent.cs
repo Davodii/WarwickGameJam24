@@ -1,9 +1,11 @@
+using System;
+
 namespace GT.Events.Concrete
 {
-    public class NoLunchEvent : Event
+    public class RandomDeathEvent : Event
     {
         // TODO: random prompt generation from file
-        public NoLunchEvent(Random rng) : base(rng, RegularDailyThreshold, string.Empty)
+        public RandomDeathEvent(Random rng) : base(rng, RandomDeathDailyThreshold, string.Empty)
         {
         }
 

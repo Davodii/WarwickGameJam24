@@ -1,3 +1,5 @@
+using System;
+
 namespace GT.Items.Cards
 {
     public class Card : IEquatable<Card>

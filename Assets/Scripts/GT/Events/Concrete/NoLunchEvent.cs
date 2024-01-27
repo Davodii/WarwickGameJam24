@@ -1,12 +1,14 @@
+using System;
+
 namespace GT.Events.Concrete
 {
-    public class BullyEvent : Event
+    public class NoLunchEvent : Event
     {
         // TODO: random prompt generation from file
-        public BullyEvent(Random rng) : base(rng, RegularDailyThreshold, string.Empty)
+        public NoLunchEvent(Random rng) : base(rng, RegularDailyThreshold, string.Empty)
         {
         }
-        
+
         public override void Result(Game game)
         {
             throw new NotImplementedException();

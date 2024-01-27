@@ -1,9 +1,11 @@
+using System;
+
 namespace GT.Events.Concrete
 {
-    public class RandomDeathEvent : Event
+    public class RoutineBagCheckEvent : Event
     {
         // TODO: random prompt generation from file
-        public RandomDeathEvent(Random rng) : base(rng, RandomDeathDailyThreshold, string.Empty)
+        public RoutineBagCheckEvent(Random rng) : base(rng, RegularDailyThreshold, string.Empty)
         {
         }
 

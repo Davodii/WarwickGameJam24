@@ -1,3 +1,5 @@
+using System;
+
 namespace GT.Events.Concrete
 {
     public class RainyDayEvent : Event

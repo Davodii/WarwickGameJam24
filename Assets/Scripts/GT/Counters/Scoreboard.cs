@@ -1,3 +1,5 @@
+using System;
+
 namespace GT.Counters
 {
     public abstract class Scoreboard

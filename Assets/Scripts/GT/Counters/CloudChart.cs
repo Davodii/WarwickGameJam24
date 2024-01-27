@@ -1,3 +1,5 @@
+using System;
+
 namespace GT.Counters
 {
     public class CloudChart : Scoreboard

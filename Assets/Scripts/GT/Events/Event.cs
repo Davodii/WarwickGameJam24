@@ -1,3 +1,5 @@
+using System;
+
 namespace GT.Events
 {
     public abstract class Event : IEvent
