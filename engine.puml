@@ -1,0 +1,100 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+enum ECardValue {
+  _1,
+  _2,
+  _3,
+  _4,
+  _5
+}
+
+class Card {
+  - value: ECardValue
+  + GetValue(): ECardValue
+}
+
+Card <-- ECardValue: categorises
+
+class Deck {
+  - cards: Card[]
+  + AddCard(card: Card): void
+  + RemoveCard(card: Card): void
+  + GetDeckValue(): int
+}
+
+Deck o- Card
+
+enum ECloudChartStatus {
+  VerySunny,
+  Sunny,
+  Cloudy,
+  Thunder
+}
+
+abstract class Scoreboard {
+  # score: int
+  + Get(): int
+  + Modify(delta: int): void
+}
+
+class CloudChart {
+  + GetChartStatus(): ECloudChartStatus
+}
+
+Scoreboard <|- CloudChart
+Scoreboard <|- GoldenTime
+ECloudChartStatus <-- CloudChart: uses
+
+class GoldenTime {
+}
+
+class Game {
+  - goldenTime: GoldenTime
+  - cloudChart: CloudChart
+  - money: int
+  - eventFactory: EventFactory
+  + GetMoney(): int
+  + GetCloudChartValue(): int
+  + GetCloudChartStatus(): ECloudChartStatus
+  + GetGoldenTime()
+  + ModifyCloudChart(delta: int)
+  + ModifyGoldenTime(delta: int)
+  + ModifyMoney(delta: int)
+}
+
+class EventFactory {
+  + CreateEvent(): IEvent
+}
+
+interface IEvent {
+  + WillHappen(): bool
+  + GetPrompt(): string
+  + Result(Player): int
+}
+
+IEvent <-- EventFactory: generates
+
+class RainyDayEvent {
+}
+
+class BullyEvent {
+}
+
+class NoLunchEvent {
+}
+
+class RoutineBagCheckEvent {
+}
+
+class RandomDeathEvent {
+}
+
+IEvent <|-- BullyEvent
+IEvent <|-- RainyDayEvent
+IEvent <|-- NoLunchEvent
+IEvent <|-- RoutineBagCheckEvent
+IEvent <|-- RandomDeathEvent
+
+@enduml
