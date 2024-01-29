@@ -2,7 +2,7 @@ using GT.Characters;
 
 namespace GT.Items.CloudChartPoints
 {
-    public sealed class CloudChartScore : IItem
+    public sealed class CloudChartScore : IItem, IEquatable<CloudChartScore>
     {
         private readonly int _score;
 
@@ -30,6 +30,18 @@ namespace GT.Items.CloudChartPoints
         public void Give(Player player)
         {
             player.ModifyCloudChart(_score);
+        }
+
+        public bool Equals(CloudChartScore? other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return _score == other._score;
+        }
+
+        public override int GetHashCode()
+        {
+            return _score;
         }
     }
 }

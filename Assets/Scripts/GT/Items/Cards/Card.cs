@@ -1,4 +1,3 @@
-using System;
 using GT.Characters;
 
 namespace GT.Items.Cards
