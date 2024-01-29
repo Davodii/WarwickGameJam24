@@ -10,13 +10,13 @@ namespace GT.Quest
         private bool _started = false;
         private string _request;
         private string _completion;
-        protected readonly Dictionary<IItem, int> Requirements;
+        private readonly Dictionary<IItem, int> _requirements;
         private readonly Dictionary<IItem, int> _rewards;
 
         public Quest(string request, string completion, Dictionary<IItem, int> requirements, Dictionary<IItem, int> rewards)
         {
             _rewards = rewards;
-            Requirements = requirements;
+            _requirements = requirements;
             _request = request;
             _completion = completion;
         }
@@ -48,7 +48,7 @@ namespace GT.Quest
 
         public virtual bool MeetsRequirements(Player player)
         {
-            foreach (KeyValuePair<IItem, int> pair in Requirements)
+            foreach (KeyValuePair<IItem, int> pair in _requirements)
             {
                 // pair.Key = IItem type
                 // pair.Value = number of item required
@@ -67,10 +67,10 @@ namespace GT.Quest
         {
             string result = "";
             // Any other requirements
-            if (Requirements.Count > 0)
+            if (_requirements.Count > 0)
             {
                 result += "Fetch: \n";
-                foreach (var requirement in Requirements)
+                foreach (var requirement in _requirements)
                 {
                     result += " - " + requirement.Key.ToString() + "\n";
                 }
