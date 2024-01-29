@@ -2,7 +2,7 @@ using System;
 
 namespace GT.Counters
 {
-    public class CloudChart : Scoreboard
+    public class CloudChart : Counter
     {
         public const int Initial = 60;
         public const int MinValue = 0;
