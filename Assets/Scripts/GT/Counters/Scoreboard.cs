@@ -2,13 +2,13 @@ using System;
 
 namespace GT.Counters
 {
-    public abstract class Scoreboard
+    public abstract class Counter
     {
         private int _score;
         private readonly int _minScore;
         private readonly int _maxScore;
 
-        protected Scoreboard(int def, int min, int max)
+        protected Counter(int def, int min, int max)
         {
             _score = def;
             _minScore = min;

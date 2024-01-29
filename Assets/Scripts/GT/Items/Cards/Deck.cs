@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,6 +22,11 @@ namespace GT.Items.Cards
         public void RemoveCard(Card card)
         {
             _cards.Remove(card); // requires some sort of comparison between cards
+        }
+
+        public bool Contains(Card card)
+        {
+            return _cards.Contains(card);
         }
 
         public int GetDeckValue()

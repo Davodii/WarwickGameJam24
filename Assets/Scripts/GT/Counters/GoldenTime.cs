@@ -1,6 +1,6 @@
 namespace GT.Counters
 {
-    public class GoldenTime : Scoreboard
+    public class GoldenTime : Counter
     {
         public const int Initial = 30;
         public const int MinValue = int.MinValue;

@@ -1,8 +1,8 @@
-using System;
+using GT.Characters;
 
 namespace GT.Items.Cards
 {
-    public class Card : IEquatable<Card>
+    public class Card : IItem, IEquatable<Card>
     {
         private readonly ECardValue _value;
 
@@ -23,6 +23,11 @@ namespace GT.Items.Cards
 
             // otherwise, equality depends on whether card values match
             return _value == other.GetValue();
+        }
+
+        public void Give(Player player)
+        {
+            player.GiveCard(this);
         }
     }
 }
