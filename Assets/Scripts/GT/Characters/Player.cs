@@ -39,13 +39,6 @@ namespace GT.Characters
             return !_miscItems.ContainsKey(item) ? 0 : _miscItems[item];
         }
 
-        //TODO: CHECK THIS WORKS??!!
-        public int NumberOfItem(Money item)
-        {
-            // Check player has the money
-            return GetMoney();
-        }
-
         public void GiveItem(IItem item)
         {
             if (HasItem(item))
@@ -86,6 +79,11 @@ namespace GT.Characters
             teacher.GiveCard(card).Give(this);
         }
 
+        public bool HasCard(Card card)
+        {
+            return _deck.Contains(card);
+        }
+        
         public void CollectBlood(Blood blood)
         {
             _bloods.Add(blood);

@@ -16,7 +16,17 @@ namespace GT.Items.Money
         {
             _money = money;
         }
-        
+
+        public EItemType GetItemType()
+        {
+            return EItemType.Money;
+        }
+
+        public int GetValue()
+        {
+            return _money;
+        }
+
         /// <summary>
         /// This is weird. To give the player money, you need to create
         /// a wallet object with some amount in it, and then run the

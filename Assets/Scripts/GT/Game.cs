@@ -1,6 +1,7 @@
 using System;
 using GT.Characters;
 using GT.Events;
+using GT.Items.Cards;
 
 namespace GT
 {
@@ -17,6 +18,11 @@ namespace GT
             // initialise anything that needs a random number
             // generator with the centralised Random object.
             _eventFactory = new EventFactory(_rng);
+        }
+
+        public void DepositCard(Card card)
+        {
+            _player.GiveCardToTeacher(_teacher, card);
         }
 
         public IEvent GenerateEvent()

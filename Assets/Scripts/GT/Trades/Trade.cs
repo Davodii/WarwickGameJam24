@@ -1,7 +1,10 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using GT.Characters;
 using GT.Items;
+using GT.Items.Cards;
+using GT.Items.Money;
 
 namespace GT.Trades
 {
@@ -38,9 +41,27 @@ namespace GT.Trades
         
         public bool MeetsRequirements(Player player)
         {
-            // omg i love linqy
-            //TODO: check to see if this works with money items
-            return _price.All(pair => player.NumberOfItem(pair.Key) >= pair.Value);
+            return _price.All(pair =>
+            {
+                IItem item = pair.Key;
+                EItemType itemType = item.GetItemType();
+                int number = pair.Value;
+
+                // only trade-able items should be included in requirements
+                Debug.Assert(itemType == EItemType.Card 
+                             || itemType == EItemType.Money
+                             || itemType == EItemType.Misc);
+
+                switch (itemType)
+                {
+                    case EItemType.Money:
+                        return player.GetMoney() >= ((Money)item).GetValue();
+                    case EItemType.Card:
+                        return player.HasCard((Card)item);
+                    default:
+                        return player.NumberOfItem(item) >= number;
+                }
+            });
         }
 
         public void AcceptTrade(Player player)
