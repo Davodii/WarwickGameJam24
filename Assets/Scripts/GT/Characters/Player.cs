@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using GT.Counters;
 using GT.Items;
+using GT.Items.Blood;
 using GT.Items.Cards;
 
 namespace GT.Characters
@@ -11,6 +11,7 @@ namespace GT.Characters
         private readonly CloudChart _cloudChart = new CloudChart();
         private readonly Deck _deck = new Deck();
         private readonly Wallet _wallet = new Wallet();
+        private readonly List<Blood> _bloods = new List<Blood>();
         private readonly Dictionary<IItem, int> _miscItems = new Dictionary<IItem, int>();
         
         public int GetMoney() { return _wallet.Get(); }
@@ -73,6 +74,16 @@ namespace GT.Characters
         public void GiveCardToTeacher(Teacher teacher, Card card)
         {
             teacher.GiveCard(card).Give(this);
+        }
+
+        public void CollectBlood(Blood blood)
+        {
+            _bloods.Add(blood);
+        }
+
+        public bool HasBullied(Npc npc)
+        {
+            return _bloods.Any(b => b.GetOwner() == npc.ToString());
         }
     }
 }

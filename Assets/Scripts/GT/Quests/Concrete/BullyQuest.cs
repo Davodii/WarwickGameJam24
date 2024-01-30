@@ -1,13 +1,12 @@
-using System.Collections.Generic;
 using GT.Characters;
 using GT.Items;
-using GT.Items.Blood;
 
-namespace GT.Quest.Concrete
+namespace GT.Quests.Concrete
 {
     public class BullyQuest : Quest
     {
-        private List<Npc> _toBully;
+        private readonly List<Npc> _toBully;
+        
         public BullyQuest(string request, string completion, List<Npc> toBully, Dictionary<IItem, int> requirements,
             Dictionary<IItem, int> rewards) : base(request, completion, requirements, rewards)
         {
@@ -33,11 +32,11 @@ namespace GT.Quest.Concrete
 
         public override string ToString()
         {
-            string result = "";
-            foreach (Blood blood in _toBully)
+            string result = string.Empty;
+            foreach (Npc npc in _toBully)
             {
-                string bullyName = blood.ToString();
-                result += "Bully " + bullyName + "\n";
+                string bulliedName = npc.ToString();
+                result += "Bully " + bulliedName + "\n";
             }
             
             // Get the base result

@@ -2,7 +2,7 @@ using GT.Characters;
 
 namespace GT.Items.Blood
 {
-    public sealed class Blood : IItem
+    public sealed class Blood : IItem, IEquatable<Blood>
     {
         private readonly Npc _owner;
         
@@ -22,7 +22,19 @@ namespace GT.Items.Blood
         
         public void Give(Player player)
         {
-            player.GiveItem(this);
+            player.CollectBlood(this);
+        }
+
+        public bool Equals(Blood? other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return _owner.ToString().Equals(other._owner.ToString());
+        }
+
+        public override int GetHashCode()
+        {
+            return _owner.GetHashCode();
         }
     }
 }

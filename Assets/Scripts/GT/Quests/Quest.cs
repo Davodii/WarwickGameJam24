@@ -2,7 +2,7 @@ using GT.Items;
 using System.Collections.Generic;
 using GT.Characters;
 
-namespace GT.Quest
+namespace GT.Quests
 {
     public abstract class Quest : IQuest
     {

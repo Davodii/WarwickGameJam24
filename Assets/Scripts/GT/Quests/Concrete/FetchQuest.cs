@@ -1,6 +1,6 @@
 using GT.Items;
 
-namespace GT.Quest.Concrete
+namespace GT.Quests.Concrete
 {
     public sealed class FetchQuest : Quest
     {
