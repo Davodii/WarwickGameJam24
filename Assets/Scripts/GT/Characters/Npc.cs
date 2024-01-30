@@ -16,6 +16,34 @@ namespace GT.Characters
             _quest = quest;
         }
 
+        public bool HasQuest()
+        {
+            return _quest == null;
+        }
+
+        public bool HasTrade()
+        {
+            return _trade == null;
+        }
+
+        public Trade GetTrade()
+        {
+            if (!HasTrade())
+            {
+                throw new Exception("No trade exists to give.");
+            }
+            return _trade!;
+        }
+
+        public Quest GetQuest()
+        {
+            if (!HasQuest())
+            {
+                throw new Exception("No quest exists to give.");
+            }
+            return _quest!;
+        }
+
         public override string ToString()
         {
             return _name;
