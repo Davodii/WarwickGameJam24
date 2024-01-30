@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using GT.Items;
 
 namespace GT.Quests.Concrete

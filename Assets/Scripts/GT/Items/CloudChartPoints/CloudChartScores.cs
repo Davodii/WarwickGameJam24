@@ -1,3 +1,4 @@
+using System;
 using GT.Characters;
 
 namespace GT.Items.CloudChartPoints
