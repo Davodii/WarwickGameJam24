@@ -1,5 +1,6 @@
 using GT.Items;
 using System.Collections.Generic;
+using System.Linq;
 using GT.Characters;
 
 namespace GT.Quests
@@ -12,8 +13,9 @@ namespace GT.Quests
         private string _completion;
         private readonly Dictionary<IItem, int> _requirements;
         private readonly Dictionary<IItem, int> _rewards;
+        protected EQuestType QuestType;
 
-        public Quest(string request, string completion, Dictionary<IItem, int> requirements, Dictionary<IItem, int> rewards)
+        protected Quest(string request, string completion, Dictionary<IItem, int> requirements, Dictionary<IItem, int> rewards)
         {
             _rewards = rewards;
             _requirements = requirements;
@@ -46,21 +48,14 @@ namespace GT.Quests
             return _rewards;
         }
 
+        public EQuestType GetQuestType()
+        {
+            return QuestType;
+        }
+
         public virtual bool MeetsRequirements(Player player)
         {
-            foreach (KeyValuePair<IItem, int> pair in _requirements)
-            {
-                // pair.Key = IItem type
-                // pair.Value = number of item required
-                int numberOfRequiredItem = player.NumberOfItem(pair.Key);
-
-                if (numberOfRequiredItem < pair.Value)
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return _requirements.All(pair => player.NumberOfItem(pair.Key) >= pair.Value);
         }
 
         public override string ToString()

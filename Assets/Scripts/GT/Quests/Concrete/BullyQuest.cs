@@ -12,6 +12,9 @@ namespace GT.Quests.Concrete
             Dictionary<IItem, int> rewards) : base(request, completion, requirements, rewards)
         {
             _toBully = toBully;
+            
+            // Assign the quest type
+            QuestType = EQuestType.Bully;
         }
 
         public override bool MeetsRequirements(Player player)

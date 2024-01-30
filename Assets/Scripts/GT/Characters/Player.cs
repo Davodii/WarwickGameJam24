@@ -4,6 +4,7 @@ using GT.Counters;
 using GT.Items;
 using GT.Items.Blood;
 using GT.Items.Cards;
+using GT.Items.Money;
 
 namespace GT.Characters
 {
@@ -36,6 +37,13 @@ namespace GT.Characters
         public int NumberOfItem(IItem item)
         {
             return !_miscItems.ContainsKey(item) ? 0 : _miscItems[item];
+        }
+
+        //TODO: CHECK THIS WORKS??!!
+        public int NumberOfItem(Money item)
+        {
+            // Check player has the money
+            return GetMoney();
         }
 
         public void GiveItem(IItem item)
