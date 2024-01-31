@@ -1,5 +1,6 @@
 using GT.Characters;
 using GT.Quests.Concrete;
+using System;
 
 namespace GT.Quests
 {

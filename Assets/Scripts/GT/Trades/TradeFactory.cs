@@ -4,6 +4,7 @@ using GT.Items;
 using GT.Items.Cards;
 using GT.Items.Money;
 using GT.Quests;
+using System;
 
 namespace GT.Trades
 {
