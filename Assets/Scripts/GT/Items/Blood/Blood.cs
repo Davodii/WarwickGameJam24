@@ -31,6 +31,11 @@ namespace GT.Items.Blood
             player.CollectBlood(this);
         }
 
+        public void Remove(Player player)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Equals(Blood? other)
         {
             if (ReferenceEquals(null, other)) return false;

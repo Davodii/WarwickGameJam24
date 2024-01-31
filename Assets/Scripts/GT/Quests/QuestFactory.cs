@@ -5,6 +5,13 @@ namespace GT.Quests
 {
     public class QuestFactory
     {
+        private readonly Random _rng;
+        
+        public QuestFactory(Random rng)
+        {
+            _rng = rng;
+        }
+        
         // Create a random quest based on the inputs to the function.
         // This function should only be called when the game needs a quest
         // to assign to an npc/ give to player.

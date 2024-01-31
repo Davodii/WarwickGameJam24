@@ -35,5 +35,10 @@ namespace GT.Items.Cards
         {
             player.GiveCard(this);
         }
+
+        public void Remove(Player player)
+        {
+            player.RemoveCard(this);
+        }
     }
 }

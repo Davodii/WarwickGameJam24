@@ -38,6 +38,11 @@ namespace GT.Items.GoldenTimeMinutes
             player.ModifyGoldenTime(_minutes);
         }
 
+        public void Remove(Player player)
+        {
+            player.ModifyGoldenTime(-1 * _minutes);
+        }
+
         public bool Equals(GoldenTimeMinutes? other)
         {
             if (ReferenceEquals(null, other)) return false;

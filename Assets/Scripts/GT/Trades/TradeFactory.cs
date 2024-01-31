@@ -9,6 +9,13 @@ namespace GT.Trades
 {
     public sealed class TradeFactory
     {
+        private readonly Random _rng;
+        
+        public TradeFactory(Random rng)
+        {
+            _rng = rng;
+        }
+        
         /// <summary>
         /// Generate a random trade based on the inputs
         /// </summary>

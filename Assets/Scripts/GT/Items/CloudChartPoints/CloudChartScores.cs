@@ -38,6 +38,11 @@ namespace GT.Items.CloudChartPoints
             player.ModifyCloudChart(_score);
         }
 
+        public void Remove(Player player)
+        {
+            player.ModifyCloudChart(-1 * _score);
+        }
+
         public bool Equals(CloudChartScore? other)
         {
             if (ReferenceEquals(null, other)) return false;

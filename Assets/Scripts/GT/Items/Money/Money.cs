@@ -42,6 +42,11 @@ namespace GT.Items.Money
             player.ModifyMoney(_money);
         }
 
+        public void Remove(Player player)
+        {
+            player.ModifyMoney(-1 * _money);
+        }
+
         public bool Equals(Money? other)
         {
             if (ReferenceEquals(null, other)) return false;
