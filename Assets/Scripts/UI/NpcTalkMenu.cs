@@ -18,8 +18,11 @@ namespace UI
         [SerializeField] private TMP_Text npcName;
         [SerializeField] private TMP_Text speech;
 
+        [FormerlySerializedAs("buttonSection")]
         [Header("Buttons")] 
-        [SerializeField] private GameObject buttonSection;
+        [SerializeField] private GameObject initialButtons;
+        [SerializeField] private GameObject tradeButtons;
+        [SerializeField] private GameObject questButtons;
 
         [Header("Misc.")] 
         [SerializeField] private GameObject background;
@@ -35,7 +38,9 @@ namespace UI
             speech.gameObject.SetActive(true);
             
             // Button Section
-            buttonSection.SetActive(true);
+            initialButtons.SetActive(true);
+            tradeButtons.SetActive(false);
+            questButtons.SetActive(false);
         }
 
         public void DisableMenu()
@@ -44,12 +49,18 @@ namespace UI
             background.SetActive(false);
             npcName.gameObject.SetActive(false);
             speech.gameObject.SetActive(false);
-            buttonSection.SetActive(false);
+            
+            // Buttons
+            initialButtons.SetActive(false);
+            tradeButtons.SetActive(false);
+            questButtons.SetActive(false);
             
             // Remove reference to npc
+            // since the menu is closed and the player went away
             _npc = null;
         }
 
+        
         public void Trade()
         {
             // Called externally by the "see trade" button
@@ -61,6 +72,18 @@ namespace UI
                 speech.text = "Fuck off I don't have anything for you";
                 return;
             }
+            
+            
+            // Update buttons
+            initialButtons.SetActive(false);
+            tradeButtons.SetActive(true);
+            
+            // Update Text / Screen things
+        }
+
+        public void AcceptTrade()
+        {
+            // Check if can trade
         }
 
         public void Quest()
@@ -84,7 +107,18 @@ namespace UI
                 return;
             }
             
-            // Show the quest Menu
+            // Update buttons
+            initialButtons.SetActive(false);
+            questButtons.SetActive(true);
+            
+            // Show requirements
+        }
+
+        public void AcceptQuest()
+        {
+            // Check if can complete quest
+            
+            
         }
 
         public void Bully()
@@ -96,11 +130,33 @@ namespace UI
             // Trigger teacher seeing the bully happen event
             
             // This button should be removed if this kid has already been bullied
+            
+            // Bully the kid
+        }
+
+        public void Back()
+        {
+            // Go back to initial screen 
+            
+            // Update buttons
+            initialButtons.SetActive(true);
+            questButtons.SetActive(false);
+            tradeButtons.SetActive(false);
+            
+            // Update text
+            speech.text = GenerateString();
         }
 
         public void Awake()
         {
             DisableMenu();
+        }
+
+        //TODO: maybe move this out of here
+        private string GenerateString()
+        {
+            return
+                "My golly gosh, who in the dickens are you? You have given me a right scare! You should be very ashamed";
         }
 
         
@@ -114,8 +170,7 @@ namespace UI
             _npc = npc;
             npcName.text = _npc.ToString();
             //TODO: "Conversation dialogue" generation
-            speech.text =
-                "My golly gosh, who in the dickens are you? You have given me a right scare! You should be very ashamed";
+            speech.text = GenerateString();
             
             
         }

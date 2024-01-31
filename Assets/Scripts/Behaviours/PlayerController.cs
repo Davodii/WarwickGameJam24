@@ -72,10 +72,10 @@ namespace Behaviours
                         
                         // Quest
                         BullyQuest quest = new BullyQuest("Plss bully this kid called PENIS HEAD",
-                            "thx, really needed that :)", new List<Npc>() { empty }, requirements, rewards);
+                            "thx, really needed that :)", new List<Npc>() { empty }, rewards);
                         
                         // Initialize npc and talk menu
-                        Npc rando = new Npc("Bob", trade, quest);
+                        Npc rando = new Npc("Rando Bob", trade, quest);
                         talkMenu.SetNpc(rando);
                         talkMenu.EnableMenu();
                     }
