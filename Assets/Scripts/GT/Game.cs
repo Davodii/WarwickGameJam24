@@ -11,6 +11,7 @@ namespace GT
     {
         private readonly Player _player = new Player();
         private readonly Teacher _teacher = new Teacher();
+        private readonly List<Npc> _npcs = new List<Npc>();
 
         private readonly Random _rng = new Random();
         private readonly EventFactory _eventFactory;
@@ -23,7 +24,7 @@ namespace GT
             // generator with the centralised Random object.
             _eventFactory = new EventFactory(_rng);
             _tradeFactory = new TradeFactory(_rng);
-            _questFactory = new QuestFactory(_rng);
+            _questFactory = new QuestFactory(_rng, _npcs);
         }
 
         public void DepositCard(Card card)

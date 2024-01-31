@@ -35,7 +35,7 @@ namespace GT.Quests.Concrete
 
                 switch (itemType)
                 {
-                    case EItemType.Blood:
+                    case EItemType.Money:
                         return player.HasBullied(((Blood)item).GetOwner());
                     case EItemType.Card:
                         return player.HasCard((Card)item);
