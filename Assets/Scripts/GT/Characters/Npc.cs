@@ -7,10 +7,10 @@ namespace GT.Characters
     public sealed class Npc
     {
         private readonly string _name;
-        private readonly Trade? _trade = null;
-        private readonly Quest? _quest = null;
+        private readonly Trade _trade = null;
+        private readonly Quest _quest = null;
 
-        public Npc(string name, Trade? dailyTrade, Quest? quest)
+        public Npc(string name, Trade dailyTrade, Quest quest)
         {
             _name = name;
             _trade = dailyTrade;
@@ -19,12 +19,12 @@ namespace GT.Characters
 
         public bool HasQuest()
         {
-            return _quest == null;
+            return _quest != null;
         }
 
         public bool HasTrade()
         {
-            return _trade == null;
+            return _trade != null;
         }
 
         public Trade GetTrade()
