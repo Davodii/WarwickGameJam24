@@ -1,7 +1,10 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using GT.Characters;
 using GT.Items;
+using GT.Items.Cards;
+using GT.Items.Money;
 
 namespace GT.Trades
 {
@@ -9,13 +12,13 @@ namespace GT.Trades
     {
         // Items are the items the player receives
         // Price is the items the player needs to "give" for the trade
-        private readonly IReadOnlyDictionary<IItem, int> _items;
-        private readonly IReadOnlyDictionary<IItem, int> _price;
+        private readonly IReadOnlyDictionary<IItem, int> _rewards;
+        private readonly IReadOnlyDictionary<IItem, int> _requirements;
 
-        public Trade(IReadOnlyDictionary<IItem, int> items, IReadOnlyDictionary<IItem, int> price)
+        public Trade(IReadOnlyDictionary<IItem, int> rewards, IReadOnlyDictionary<IItem, int> requirements)
         {
-            _price = price;
-            _items = items;
+            _requirements = requirements;
+            _rewards = rewards;
         }
 
         /// <summary>
@@ -24,7 +27,7 @@ namespace GT.Trades
         /// <returns>Items required for trade as well as count of each</returns>
         public IReadOnlyDictionary<IItem, int> GetPrice()
         {
-            return _price;
+            return _requirements;
         }
         
         /// <summary>
@@ -33,28 +36,57 @@ namespace GT.Trades
         /// <returns>Items player gets when trade is accepted</returns>
         public IReadOnlyDictionary<IItem, int> GetItems()
         {
-            return _items;
+            return _rewards;
         }
         
         public bool MeetsRequirements(Player player)
         {
-            // omg i love linqy
-            //TODO: check to see if this works with money items
-            return _price.All(pair => player.NumberOfItem(pair.Key) >= pair.Value);
+            return _requirements.All(pair =>
+            {
+                IItem item = pair.Key;
+                EItemType itemType = item.GetItemType();
+                int number = pair.Value;
+
+                // only trade-able items should be included in requirements
+                Debug.Assert(itemType == EItemType.Card 
+                             || itemType == EItemType.Money
+                             || itemType == EItemType.Misc);
+
+                switch (itemType)
+                {
+                    case EItemType.Money:
+                        return player.GetMoney() >= ((Money)item).GetValue();
+                    case EItemType.Card:
+                        return player.HasCard((Card)item);
+                    default:
+                        return player.NumberOfItem(item) >= number;
+                }
+            });
         }
 
         public void AcceptTrade(Player player)
         {
             // Add items in trade to the player
-            foreach (var pair in _items)
+            foreach (var pair in _rewards)
             {
-                for (int i = 0; i < pair.Value; i++)
+                IItem item = pair.Key;
+                int count = pair.Value;
+                for (int i = 0; i < count; i++)
                 {
-                    player.GiveItem(pair.Key);
+                    item.Give(player);
                 }
             }
             
             // Remove items from player's inventory
+            foreach (var pair in _requirements)
+            {
+                IItem item = pair.Key;
+                int count = pair.Value;
+                for (int i = 0; i < count; i++)
+                {
+                    item.Remove(player);
+                }
+            }
         }
     }
 }

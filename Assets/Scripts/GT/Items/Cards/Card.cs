@@ -26,9 +26,19 @@ namespace GT.Items.Cards
             return _value == other.GetValue();
         }
 
+        public EItemType GetItemType()
+        {
+            return EItemType.Card;
+        }
+
         public void Give(Player player)
         {
             player.GiveCard(this);
+        }
+
+        public void Remove(Player player)
+        {
+            player.RemoveCard(this);
         }
     }
 }

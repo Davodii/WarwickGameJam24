@@ -20,10 +20,20 @@ namespace GT.Items.Blood
         {
             return _owner.ToString();
         }
-        
+
+        public EItemType GetItemType()
+        {
+            return EItemType.Blood;
+        }
+
         public void Give(Player player)
         {
             player.CollectBlood(this);
+        }
+
+        public void Remove(Player player)
+        {
+            throw new NotImplementedException();
         }
 
         public bool Equals(Blood? other)

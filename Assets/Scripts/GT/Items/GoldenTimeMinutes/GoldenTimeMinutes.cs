@@ -16,7 +16,12 @@ namespace GT.Items.GoldenTimeMinutes
         {
             _minutes = minutes;
         }
-        
+
+        public EItemType GetItemType()
+        {
+            return EItemType.GoldenTime;
+        }
+
         /// <summary>
         /// This is weird. To modify the player's golden time, you
         /// need to create a GoldenTimeMinutes object with some score
@@ -31,6 +36,11 @@ namespace GT.Items.GoldenTimeMinutes
         public void Give(Player player)
         {
             player.ModifyGoldenTime(_minutes);
+        }
+
+        public void Remove(Player player)
+        {
+            player.ModifyGoldenTime(-1 * _minutes);
         }
 
         public bool Equals(GoldenTimeMinutes? other)

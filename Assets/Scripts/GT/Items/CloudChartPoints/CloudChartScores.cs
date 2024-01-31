@@ -16,7 +16,12 @@ namespace GT.Items.CloudChartPoints
         {
             _score = score;
         }
-        
+
+        public EItemType GetItemType()
+        {
+            return EItemType.CloudChart;
+        }
+
         /// <summary>
         /// This is weird. To modify the player's cloud chart score,
         /// create a CloudChartPoints object with some score in it,
@@ -31,6 +36,11 @@ namespace GT.Items.CloudChartPoints
         public void Give(Player player)
         {
             player.ModifyCloudChart(_score);
+        }
+
+        public void Remove(Player player)
+        {
+            player.ModifyCloudChart(-1 * _score);
         }
 
         public bool Equals(CloudChartScore? other)

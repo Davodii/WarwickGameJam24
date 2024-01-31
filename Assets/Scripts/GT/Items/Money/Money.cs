@@ -16,7 +16,17 @@ namespace GT.Items.Money
         {
             _money = money;
         }
-        
+
+        public EItemType GetItemType()
+        {
+            return EItemType.Money;
+        }
+
+        public int GetValue()
+        {
+            return _money;
+        }
+
         /// <summary>
         /// This is weird. To give the player money, you need to create
         /// a wallet object with some amount in it, and then run the
@@ -30,6 +40,11 @@ namespace GT.Items.Money
         public void Give(Player player)
         {
             player.ModifyMoney(_money);
+        }
+
+        public void Remove(Player player)
+        {
+            player.ModifyMoney(-1 * _money);
         }
 
         public bool Equals(Money? other)

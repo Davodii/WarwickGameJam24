@@ -25,25 +25,25 @@ namespace GT.Characters
         public void ModifyCloudChart(int delta) { _cloudChart.Modify(delta); }
 
         public void GiveCard(Card card) { _deck.AddCard(card); }
-
+        public void RemoveCard(Card card) { _deck.RemoveCard(card); }
+        public void GiveCardToTeacher(Teacher teacher, Card card)
+        {
+            teacher.GiveCard(card).Give(this);
+        }
+        public bool HasCard(Card card)
+        {
+            return _deck.Contains(card);
+        }
+        
         public int GetGoldenTime() { return _goldenTime.Get(); }
         public void ModifyGoldenTime(int delta) { _goldenTime.Modify(delta); }
-
         public bool HasItem(IItem item)
         {
             return _miscItems.ContainsKey(item);
         }
-        
         public int NumberOfItem(IItem item)
         {
             return !_miscItems.ContainsKey(item) ? 0 : _miscItems[item];
-        }
-
-        //TODO: CHECK THIS WORKS??!!
-        public int NumberOfItem(Money item)
-        {
-            // Check player has the money
-            return GetMoney();
         }
 
         public void GiveItem(IItem item)
@@ -57,15 +57,14 @@ namespace GT.Characters
                 _miscItems.Add(item, 1);
             }
         }
-
-        public bool RemoveItem(IItem item)
+        public void RemoveItem(IItem item)
         {
             // can't delete non-existent item
             if (!HasItem(item))
             {
-                return false;
+                throw new Exception("Can't delete an item that doesn't exist.");
             }
-
+        
             // remove key-value pair completely if only 1 of item exists
             if (_miscItems[item] == 1)
             {
@@ -76,21 +75,12 @@ namespace GT.Characters
             {
                 _miscItems[item]--;
             }
-
-            // successful deletion
-            return true;
         }
-
-        public void GiveCardToTeacher(Teacher teacher, Card card)
-        {
-            teacher.GiveCard(card).Give(this);
-        }
-
+        
         public void CollectBlood(Blood blood)
         {
             _bloods.Add(blood);
         }
-
         public bool HasBullied(Npc npc)
         {
             return _bloods.Any(b => b.GetOwner() == npc.ToString());

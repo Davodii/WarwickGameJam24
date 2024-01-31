@@ -21,7 +21,11 @@ namespace GT.Items.Cards
 
         public void RemoveCard(Card card)
         {
-            _cards.Remove(card); // requires some sort of comparison between cards
+            // requires some sort of comparison between cards
+            if (!_cards.Remove(card))
+            {
+                throw new Exception("Can't remove non-existent card.");
+            }
         }
 
         public bool Contains(Card card)
