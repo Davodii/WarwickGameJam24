@@ -50,17 +50,22 @@ namespace GT.Characters
             return _name;
         }
 
-        public void AcceptTrade(Player player)
+        public bool AcceptTrade(Player player)
         {
             // Complete a trade based on the items in the trade
-            if (_trade == null)
-                return;
-            
+            if (!HasTrade())
+            {
+                throw new Exception("No trade exists to accept.");
+            }
+
             // This function should only be called when the trade can be completed
-            if (!_trade.MeetsRequirements(player))
-                return;
+            if (!_trade!.MeetsRequirements(player))
+            {
+                return false;
+            }
 
             _trade.AcceptTrade(player);
+            return true;
         }
     }
 }
