@@ -45,11 +45,6 @@ namespace GT.Characters
             return _quest!;
         }
 
-        public override string ToString()
-        {
-            return _name;
-        }
-
         public bool AcceptTrade(Player player)
         {
             // Complete a trade based on the items in the trade
@@ -66,6 +61,11 @@ namespace GT.Characters
 
             _trade.AcceptTrade(player);
             return true;
+        }
+        
+        public override string ToString()
+        {
+            return _name;
         }
     }
 }

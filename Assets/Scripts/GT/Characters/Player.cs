@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using GT.Counters;
@@ -84,7 +83,7 @@ namespace GT.Characters
         }
         public bool HasBullied(Npc npc)
         {
-            return _bloods.Any(b => b.GetOwner() == npc.ToString());
+            return _bloods.Any(b => b.GetOwner().ToString() == npc.ToString());
         }
     }
 }

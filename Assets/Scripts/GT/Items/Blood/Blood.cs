@@ -16,9 +16,9 @@ namespace GT.Items.Blood
         /// Get the name of the kid who the blood belongs to.
         /// </summary>
         /// <returns>The name of the Npc</returns>
-        public string GetOwner()
+        public Npc GetOwner()
         {
-            return _owner.ToString();
+            return _owner;
         }
 
         public EItemType GetItemType()

@@ -48,10 +48,13 @@ namespace GT.Trades
                 int number = pair.Value;
 
                 // only trade-able items should be included in requirements
-                Debug.Assert(itemType == EItemType.Card 
-                             || itemType == EItemType.Money
-                             || itemType == EItemType.Misc);
-
+                if (itemType != EItemType.Card
+                    && itemType != EItemType.Money
+                    && itemType != EItemType.Misc)
+                {
+                    throw new Exception("Not trade-able item attempted as trade requirement." + itemType);
+                }
+                
                 switch (itemType)
                 {
                     case EItemType.Money:
