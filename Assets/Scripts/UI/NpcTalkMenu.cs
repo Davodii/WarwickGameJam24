@@ -84,6 +84,7 @@ namespace UI
         public void AcceptTrade()
         {
             // Check if can trade
+            // testuing
         }
 
         public void Quest()
