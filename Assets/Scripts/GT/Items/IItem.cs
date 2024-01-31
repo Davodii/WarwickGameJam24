@@ -1,8 +1,9 @@
+using System;
 using GT.Characters;
 
 namespace GT.Items
 {
-    public interface IItem
+    public interface IItem : IEquatable<IItem>
     {
         EItemType GetItemType();
         void Give(Player player);

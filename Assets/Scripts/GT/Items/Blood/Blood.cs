@@ -3,7 +3,7 @@ using GT.Characters;
 
 namespace GT.Items.Blood
 {
-    public sealed class Blood : IItem, IEquatable<Blood>
+    public sealed class Blood : IItem
     {
         private readonly Npc _owner;
         
@@ -36,11 +36,15 @@ namespace GT.Items.Blood
             throw new NotImplementedException();
         }
 
-        public bool Equals(Blood? other)
+        public bool Equals(IItem? other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return _owner.ToString().Equals(other._owner.ToString());
+            
+            if (other.GetItemType() != EItemType.Blood) return false;
+
+            Blood otherBlood = (Blood)other;
+            return _owner.ToString().Equals(otherBlood.GetOwner().ToString());
         }
 
         public override int GetHashCode()

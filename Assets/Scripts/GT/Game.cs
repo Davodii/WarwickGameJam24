@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using GT.Characters;
 using GT.Events;
 using GT.Items.Cards;

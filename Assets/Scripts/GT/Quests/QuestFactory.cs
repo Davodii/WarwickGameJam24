@@ -1,6 +1,7 @@
 using GT.Characters;
 using GT.Quests.Concrete;
 using System;
+using System.Collections.Generic;
 using GT.Items;
 using GT.Items.Cards;
 using GT.Items.Money;

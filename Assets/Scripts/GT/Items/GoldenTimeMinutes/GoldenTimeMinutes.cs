@@ -3,7 +3,7 @@ using GT.Characters;
 
 namespace GT.Items.GoldenTimeMinutes
 {
-    public sealed class GoldenTimeMinutes : IItem, IEquatable<GoldenTimeMinutes>
+    public sealed class GoldenTimeMinutes : IItem
     {
         private readonly int _minutes;
 
@@ -43,11 +43,15 @@ namespace GT.Items.GoldenTimeMinutes
             player.ModifyGoldenTime(-1 * _minutes);
         }
 
-        public bool Equals(GoldenTimeMinutes? other)
+        public bool Equals(IItem? other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return _minutes == other._minutes;
+
+            if (other.GetItemType() != EItemType.GoldenTime) return false;
+
+            GoldenTimeMinutes otherMinutes = (GoldenTimeMinutes)other;
+            return _minutes == otherMinutes._minutes;
         }
 
         public override int GetHashCode()
