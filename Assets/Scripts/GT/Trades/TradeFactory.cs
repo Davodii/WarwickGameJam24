@@ -24,7 +24,8 @@ namespace GT.Trades
         public Trade CreateRandomTrade()
         {
             // TODO: introduce some way of making trades more/less "expensive"
-            Dictionary<IItem, int> items = new (), price = new ();
+            Dictionary<IItem, int> items = new Dictionary<IItem, int>();
+            Dictionary<IItem, int> price = new Dictionary<IItem, int>();
 
             // Add random items
             items.Add(new Card(ECardValue._1), 1);

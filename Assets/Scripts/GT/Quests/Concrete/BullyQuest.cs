@@ -8,8 +8,11 @@ namespace GT.Quests.Concrete
     {
         private readonly List<Npc> _toBully;
         
-        public BullyQuest(string request, string completion, List<Npc> toBully, Dictionary<IItem, int> requirements,
-            Dictionary<IItem, int> rewards) : base(request, completion, requirements, rewards)
+        public BullyQuest(
+            string request,
+            string completion, List<Npc> toBully,
+            Dictionary<IItem, int> rewards)
+                : base(request, completion, null!, rewards)
         {
             _toBully = toBully;
             
@@ -19,9 +22,6 @@ namespace GT.Quests.Concrete
 
         public override bool MeetsRequirements(Player player)
         {
-            // needs to meet other requirements (maybe other items)
-            bool meetsBaseRequirements = base.MeetsRequirements(player);
-            
             bool bullied = true;
             foreach (Npc npc in _toBully)
             {
@@ -31,7 +31,7 @@ namespace GT.Quests.Concrete
                 }
             }
 
-            return bullied && meetsBaseRequirements;
+            return bullied;
         }
 
         public override string ToString()

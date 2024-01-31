@@ -84,7 +84,7 @@ namespace GT.Characters
         }
         public bool HasBullied(Npc npc)
         {
-            return _bloods.Any(b => b.GetOwner() == npc.ToString());
+            return _bloods.Any(b => b.GetOwner().ToString() == npc.ToString());
         }
     }
 }

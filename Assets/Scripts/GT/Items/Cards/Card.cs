@@ -3,7 +3,7 @@ using GT.Characters;
 
 namespace GT.Items.Cards
 {
-    public class Card : IItem, IEquatable<Card>
+    public class Card : IItem
     {
         private readonly ECardValue _value;
 
@@ -14,16 +14,20 @@ namespace GT.Items.Cards
 
         public ECardValue GetValue() { return _value; }
 
-        public bool Equals(Card? other)
+        public bool Equals(IItem? other)
         {
             // if other is null, then they can't match
             if (ReferenceEquals(null, other)) return false;
             
             // if it's the same pointer, they must be equal
             if (ReferenceEquals(this, other)) return true;
+            
+            if (other.GetItemType() != EItemType.Card) return false;
+
+            Card otherCard = (Card)other;
 
             // otherwise, equality depends on whether card values match
-            return _value == other.GetValue();
+            return _value == otherCard.GetValue();
         }
 
         public EItemType GetItemType()

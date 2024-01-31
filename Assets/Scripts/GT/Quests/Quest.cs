@@ -1,7 +1,11 @@
 using GT.Items;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using GT.Characters;
+using GT.Items.Blood;
+using GT.Items.Cards;
+using GT.Items.Money;
 
 namespace GT.Quests
 {
@@ -11,14 +15,14 @@ namespace GT.Quests
         private bool _started = false;
         private string _request;
         private string _completion;
-        private readonly Dictionary<IItem, int> _requirements;
+        protected readonly Dictionary<IItem, int> Requirements;
         private readonly Dictionary<IItem, int> _rewards;
         protected EQuestType QuestType;
 
         protected Quest(string request, string completion, Dictionary<IItem, int> requirements, Dictionary<IItem, int> rewards)
         {
             _rewards = rewards;
-            _requirements = requirements;
+            Requirements = requirements;
             _request = request;
             _completion = completion;
         }
@@ -38,12 +42,17 @@ namespace GT.Quests
             return _started;
         }
 
+        public IReadOnlyDictionary<IItem, int> Rewards()
+        {
+            return _rewards;
+        }
+
         public void Start()
         {
             _started = true;
         }
 
-        public IReadOnlyDictionary<IItem, int> Rewards()
+        public IReadOnlyDictionary<IItem, int> GetRewards()
         {
             return _rewards;
         }
@@ -53,19 +62,21 @@ namespace GT.Quests
             return QuestType;
         }
 
-        public virtual bool MeetsRequirements(Player player)
+        public abstract bool MeetsRequirements(Player player);
+
+        public void CompleteQuest()
         {
-            return _requirements.All(pair => player.NumberOfItem(pair.Key) >= pair.Value);
+            Complete();
         }
 
         public override string ToString()
         {
             string result = "";
             // Any other requirements
-            if (_requirements.Count > 0)
+            if (Requirements.Count > 0)
             {
                 result += "Fetch: \n";
-                foreach (var requirement in _requirements)
+                foreach (var requirement in Requirements)
                 {
                     result += " - " + requirement.Key.ToString() + "\n";
                 }

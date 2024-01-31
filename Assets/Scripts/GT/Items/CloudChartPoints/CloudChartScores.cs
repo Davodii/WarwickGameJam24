@@ -3,16 +3,16 @@ using GT.Characters;
 
 namespace GT.Items.CloudChartPoints
 {
-    public sealed class CloudChartScore : IItem, IEquatable<CloudChartScore>
+    public sealed class CloudChartPoints : IItem
     {
         private readonly int _score;
 
-        public CloudChartScore()
+        public CloudChartPoints()
         {
             _score = 0;
         }
 
-        public CloudChartScore(int score)
+        public CloudChartPoints(int score)
         {
             _score = score;
         }
@@ -43,11 +43,15 @@ namespace GT.Items.CloudChartPoints
             player.ModifyCloudChart(-1 * _score);
         }
 
-        public bool Equals(CloudChartScore? other)
+        public bool Equals(IItem? other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return _score == other._score;
+
+            if (other.GetItemType() == EItemType.CloudChart) return false;
+
+            CloudChartPoints otherPoints = (CloudChartPoints)other;
+            return _score == otherPoints._score;
         }
 
         public override int GetHashCode()

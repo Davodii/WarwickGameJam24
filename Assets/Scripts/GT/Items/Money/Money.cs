@@ -3,7 +3,7 @@ using GT.Characters;
 
 namespace GT.Items.Money
 {
-    public sealed class Money : IItem, IEquatable<Money>
+    public sealed class Money : IItem
     {
         private readonly int _money;
 
@@ -47,11 +47,15 @@ namespace GT.Items.Money
             player.ModifyMoney(-1 * _money);
         }
 
-        public bool Equals(Money? other)
+        public bool Equals(IItem? other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return _money == other._money;
+
+            if (other.GetItemType() != EItemType.Money) return false;
+
+            Money otherMoney = (Money)other;
+            return _money == otherMoney.GetValue();
         }
 
         public override int GetHashCode()
