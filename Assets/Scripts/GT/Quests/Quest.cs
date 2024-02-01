@@ -69,6 +69,16 @@ namespace GT.Quests
             Complete();
         }
 
+        public string GetRequest()
+        {
+            return _request;
+        }
+
+        public string GetCompletion()
+        {
+            return _completion;
+        }
+
         public override string ToString()
         {
             string result = "";
