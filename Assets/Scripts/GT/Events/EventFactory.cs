@@ -1,5 +1,5 @@
-using GT.Events.Concrete;
 using System;
+using GT.Events.Concrete;
 
 namespace GT.Events
 {
