@@ -1,7 +1,7 @@
-using GT.Characters;
 using GT.Quests.Concrete;
 using System;
 using System.Collections.Generic;
+using GT.Characters.Npcs;
 using GT.Items;
 using GT.Items.Cards;
 using GT.Items.Money;
@@ -27,10 +27,18 @@ namespace GT.Quests
         //      This should be something like an enum that increases the maximum
         //      number of required items
 
-        public Quest CreateQuest()
+        public Quest? CreateQuest()
         {
             // TODO: actual randomness
             int randomNumber = _rng.Next(100);
+
+            if (randomNumber < 50)
+            {
+                return null;
+            }
+
+            // new random number
+            randomNumber = _rng.Next(100);
 
             if (randomNumber < 50)
             {

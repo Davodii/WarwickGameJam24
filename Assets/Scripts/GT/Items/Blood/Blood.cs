@@ -1,4 +1,5 @@
 using System;
+using GT.Characters.Npcs;
 using GT.Characters;
 
 namespace GT.Items.Blood
