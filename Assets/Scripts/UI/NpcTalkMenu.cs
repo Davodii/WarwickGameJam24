@@ -18,6 +18,9 @@ namespace UI
         [SerializeField] private TMP_Text npcName;
         [SerializeField] private TMP_Text speech;
 
+        [Header("Trading")] 
+        [SerializeField] private TradeSectionContextMenu tradeSection;
+
         [FormerlySerializedAs("buttonSection")]
         [Header("Buttons")] 
         [SerializeField] private GameObject initialButtons;
@@ -36,6 +39,7 @@ namespace UI
             background.SetActive(true);
             npcName.gameObject.SetActive(true);
             speech.gameObject.SetActive(true);
+            tradeSection.gameObject.SetActive(false);
             
             // Button Section
             initialButtons.SetActive(true);
@@ -49,6 +53,7 @@ namespace UI
             background.SetActive(false);
             npcName.gameObject.SetActive(false);
             speech.gameObject.SetActive(false);
+            tradeSection.gameObject.SetActive(false);
             
             // Buttons
             initialButtons.SetActive(false);
@@ -79,11 +84,28 @@ namespace UI
             tradeButtons.SetActive(true);
             
             // Update Text / Screen things
+            tradeSection.gameObject.SetActive(true);
+            speech.gameObject.SetActive(false);
+            
+            //TODO: Create trade layout / items
+            
+            // Add request items
+            foreach (var pair in _npc.GetTrade().GetPrice())
+            {
+                tradeSection.AddRequest(pair.Key, pair.Value);
+            }
+            // Add reward items
+            foreach (var pair in _npc.GetTrade().GetItems())
+            {
+                tradeSection.AddReward(pair.Key, pair.Value);
+            }
+            
         }
 
         public void AcceptTrade()
         {
             // Check if can trade
+            // I.e. if the player has the requirements for the trade
         }
 
         public void Quest()
@@ -112,6 +134,8 @@ namespace UI
             questButtons.SetActive(true);
             
             // Show requirements
+            speech.text = _npc.GetQuest().GetRequest();
+            
         }
 
         public void AcceptQuest()
@@ -142,9 +166,17 @@ namespace UI
             initialButtons.SetActive(true);
             questButtons.SetActive(false);
             tradeButtons.SetActive(false);
+            tradeSection.gameObject.SetActive(false);
             
             // Update text
+            speech.gameObject.SetActive(true);
             speech.text = GenerateString();
+            
+            // Delete any Trade icons generated
+            foreach (var group in tradeSection.gameObject.GetComponentsInChildren<TradeGroup>())
+            {
+                DestroyImmediate(group.gameObject);
+            }
         }
 
         public void Awake()
