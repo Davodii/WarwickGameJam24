@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GT.Items;
 using GT.Quests;
 using GT.Trades;
+using GT.Items.Blood;
 
 namespace GT.Characters
 {
@@ -84,6 +85,10 @@ namespace GT.Characters
                     item.Give(player);
                 }
             }
+
+            // give the player a Blood object to prove they
+            // have bullied this NPC
+            new Blood(this).Give(player);
         }
         
         public override string ToString()
