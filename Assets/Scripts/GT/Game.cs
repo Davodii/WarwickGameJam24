@@ -41,5 +41,10 @@ namespace GT
             // if an active random death event does get generated then it must happen
             return deathEvent.WillHappen() ? deathEvent : regularEvent;
         }
+
+        public Player GetPlayer()
+        {
+            return _player;
+        }
     }
 }
