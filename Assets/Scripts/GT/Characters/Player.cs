@@ -5,7 +5,6 @@ using GT.Counters;
 using GT.Items;
 using GT.Items.Blood;
 using GT.Items.Cards;
-using GT.Items.Money;
 
 namespace GT.Characters
 {
@@ -85,6 +84,20 @@ namespace GT.Characters
         public bool HasBullied(Npc npc)
         {
             return _bloods.Any(b => b.GetOwner().ToString() == npc.ToString());
+        }
+        /// <summary>
+        /// Bully another NPC. You should obtain some items from them,
+        /// randomly, assuming they haven't been bullied yet.
+        /// </summary>
+        /// <param name="npc"></param>
+        public void Bully(Npc npc)
+        {
+            if (HasBullied(npc))
+            {
+                throw new Exception("Can't bully someone twice in one day.");
+            }
+
+            npc.GetBullied(this);
         }
     }
 }
