@@ -67,7 +67,7 @@ namespace Behaviours
                         Dictionary<IItem, int> rewards = new Dictionary<IItem, int>();
                         rewards.Add(new Card(ECardValue._1), 2);
                         Dictionary<IItem, int> requirements = new Dictionary<IItem, int>();
-                        rewards.Add(new Money(100), 10);
+                        requirements.Add(new Money(100), 10);
                         Trade trade = new Trade(rewards, requirements);
                         
                         // Quest

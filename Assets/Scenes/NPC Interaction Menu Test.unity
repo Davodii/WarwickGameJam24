@@ -504,6 +504,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1596156420}
     m_Modifications:
+    - target: {fileID: 440851735047388177, guid: 25be012c4f0adc4488729d03a489b092, type: 3}
+      propertyPath: m_text
+      value: Billy
+      objectReference: {fileID: 0}
+    - target: {fileID: 440851735047388177, guid: 25be012c4f0adc4488729d03a489b092, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925387812580132307, guid: 25be012c4f0adc4488729d03a489b092, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5d9f0496620b4204babe0253fd9179e3, type: 2}
+    - target: {fileID: 1925387812580132307, guid: 25be012c4f0adc4488729d03a489b092, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8622131263129348615, guid: 5d9f0496620b4204babe0253fd9179e3, type: 2}
+    - target: {fileID: 1925387812580132307, guid: 25be012c4f0adc4488729d03a489b092, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2168877638745942708, guid: 25be012c4f0adc4488729d03a489b092, type: 3}
       propertyPath: m_Name
       value: Character Context Menu

@@ -15,6 +15,7 @@ namespace UI
             // Create new trade group
             // Set item to trade group
             GameObject newGroup = Instantiate(tradeGroup, leftPanel.transform, false);
+            newGroup.name = "Request Group";
             newGroup.GetComponent<TradeGroup>().SetItem(item, count);
         }
 
@@ -22,6 +23,7 @@ namespace UI
         {
             // Add icon for reward
             GameObject newGroup = Instantiate(tradeGroup, rightPanel.transform, false);
+            newGroup.name = "Reward Group";
             newGroup.GetComponent<TradeGroup>().SetItem(item, count);
         }
     }

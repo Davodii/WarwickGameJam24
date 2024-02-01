@@ -169,7 +169,14 @@ namespace UI
             tradeSection.gameObject.SetActive(false);
             
             // Update text
+            speech.gameObject.SetActive(true);
             speech.text = GenerateString();
+            
+            // Delete any Trade icons generated
+            foreach (var group in tradeSection.gameObject.GetComponentsInChildren<TradeGroup>())
+            {
+                DestroyImmediate(group.gameObject);
+            }
         }
 
         public void Awake()

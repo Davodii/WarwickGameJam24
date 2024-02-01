@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: x30
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5d9f0496620b4204babe0253fd9179e3, type: 2}
+  m_sharedMaterial: {fileID: -8622131263129348615, guid: 5d9f0496620b4204babe0253fd9179e3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -15.308273, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -258,27 +258,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundSprites:
-  - {fileID: -998999921, guid: 52cae2e8af2d91f4096b89ead6bb706f, type: 3}
-  - {fileID: -665936413, guid: 52cae2e8af2d91f4096b89ead6bb706f, type: 3}
-  - {fileID: -560036405, guid: 52cae2e8af2d91f4096b89ead6bb706f, type: 3}
-  - {fileID: 1508266078, guid: 52cae2e8af2d91f4096b89ead6bb706f, type: 3}
-  - {fileID: 1090272679, guid: 52cae2e8af2d91f4096b89ead6bb706f, type: 3}
+  - {fileID: 21300000, guid: 7cbe2dad286c22745b976dfa91e2dbe5, type: 3}
+  - {fileID: 21300000, guid: c572a30d02159564b9e2c657e8f2a26b, type: 3}
+  - {fileID: 21300000, guid: f62be141e7e42c04a93609d486e69269, type: 3}
+  - {fileID: 21300000, guid: e5c92ca008a982c49b22355ed0de9eb4, type: 3}
   background: {fileID: 5154810324585135116}
-  itemSprite:
-    id: 0
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-    xOffset: 0
-    yOffset: 0
-    xAdvance: 0
-    scale: 0
-    name: 
-    hashCode: 0
-    unicode: 0
-    pivot: {x: 0, y: 0}
-    sprite: {fileID: 0}
+  itemSprite: {fileID: 5799707229515045159}
   itemCount: {fileID: 8653865596718173268}
 --- !u!1 &6374951113678319956
 GameObject:

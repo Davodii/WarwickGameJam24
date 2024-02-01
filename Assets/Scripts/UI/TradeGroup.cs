@@ -17,7 +17,7 @@ namespace UI
         
         [Header("UI Elements")]
         [SerializeField] private RawImage background;
-        [SerializeField] private TMP_Sprite itemSprite;
+        [SerializeField] private RawImage itemSprite;
         [SerializeField] private TMP_Text itemCount;
 
         public void SetItem(IItem item, int count)
@@ -34,7 +34,8 @@ namespace UI
         {
             // Set the background sprite randomly when teh object is created
             Random rand = new Random();
-            background.texture = backgroundSprites[rand.Next(backgroundSprites.Count)].texture;
+            Sprite sprite = backgroundSprites[rand.Next(backgroundSprites.Count)];
+            background.texture = sprite.texture;
         }
     }
 }
