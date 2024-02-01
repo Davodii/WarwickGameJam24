@@ -10,6 +10,24 @@ namespace GT
 {
     public sealed class Game
     {
+        private static Game? _instance = null;
+
+        /// <summary>
+        /// Get the singleton instance of the Game class:
+        /// <code>
+        /// Game g = Game.GetInstance();
+        /// </code>
+        /// </summary>
+        /// <returns>Singleton game instance.</returns>
+        public static Game? GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new Game();
+            }
+            return _instance;
+        }
+        
         private readonly Player _player = new Player();
         private readonly Teacher _teacher = new Teacher();
         private readonly List<Npc> _npcs = new List<Npc>();
@@ -19,7 +37,7 @@ namespace GT
         private readonly TradeFactory _tradeFactory;
         private readonly QuestFactory _questFactory;
 
-        public Game()
+        private Game()
         {
             // initialise anything that needs a random number
             // generator with the centralised Random object.

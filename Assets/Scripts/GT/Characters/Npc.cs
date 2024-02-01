@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using GT.Items;
+using GT.Items.Blood;
 using GT.Quests;
 using GT.Trades;
-using GT.Items.Blood;
 
 namespace GT.Characters
 {
@@ -24,12 +24,12 @@ namespace GT.Characters
 
         public bool HasQuest()
         {
-            return _quest == null;
+            return _quest != null;
         }
 
         public bool HasTrade()
         {
-            return _trade == null;
+            return _trade != null;
         }
 
         public Trade GetTrade()
@@ -85,7 +85,7 @@ namespace GT.Characters
                     item.Give(player);
                 }
             }
-
+            
             // give the player a Blood object to prove they
             // have bullied this NPC
             new Blood(this).Give(player);
