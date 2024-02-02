@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using GT.Characters;
 using GT.Characters.Npcs;
+using GT.Counters;
 using GT.Events;
 using GT.Items.Cards;
+using GT.Items.GoldenTimeMinutes;
 using GT.Quests;
 using GT.Trades;
 
@@ -35,6 +37,7 @@ namespace GT
         #region Fields
 
         private const int DailyStartMoney = 500; // £5.00
+        private const int DailyStartCloudChart = (int)ECloudChartStatus.Sunny; // bottom of sunny
         
         private readonly Player _player = new Player();
         private readonly Teacher _teacher = new Teacher();
@@ -57,14 +60,9 @@ namespace GT
         
         private Game()
         {
-            // initialise anything that needs a random number
-            // generator with the centralised Random object.
             _eventFactory = new EventFactory(_rng);
             _tradeFactory = new TradeFactory(_rng);
-            _questFactory = new QuestFactory(_rng, _npcs);
-            
-            // day system
-            _day = 0;
+            _questFactory = new QuestFactory(_rng);
         }
         
         #endregion
@@ -76,7 +74,7 @@ namespace GT
             return _day;
         }
 
-        public bool FinalDay()
+        public bool IsFinalDay()
         {
             return _day == NumberOfDays;
         }
@@ -85,24 +83,44 @@ namespace GT
         {
             // Generate interactive NPCs
             GenerateNpcs();
+            
+            // attach NPC list to quest factory
+            _questFactory.SetNpcs(_npcs);
+
+            // reset day counter
+            _day = 0;
         }
 
         public void NewDay()
         {
-            // Generate daily event
-            GenerateEvent();
-            
-            // TODO: game should end if death event
-            // TODO: generate daily quest for event if not death event (and if required)
+            // Add to golden time based on today's performance
+            // NOTE: the below needs to run before other stats are reset,
+            //       because it makes use of them to calculate the amount
+            //       of golden time.
+            DaysStatsToGoldenTime().Give(_player);
             
             // Reset player stats
             _player.ResetMoney(DailyStartMoney);
+            _player.ResetCloudChart(DailyStartCloudChart);
             _player.ClearItems();
             _player.ClearBlood();
             // cards, golden time and cloud chart are carried over
             
-            // Add to golden time based on today's performance
-            // TODO: the above
+            // Generate daily event
+            GenerateEvent();
+
+            // increment day counter
+            _day++;
+        }
+
+        private GoldenTimeMinutes DaysStatsToGoldenTime()
+        {
+            int money = _player.GetMoney();
+            int deckValue = _player.GetDeckValue();
+            int cloudChart = _player.GetCloudChartValue();
+
+            // TODO: you can easily adjust this formula
+            return new GoldenTimeMinutes(money / 100 * cloudChart + deckValue);
         }
         
         #endregion
@@ -129,6 +147,9 @@ namespace GT
         
         private void GenerateNpcs()
         {
+            // ensure that NPCs from previous games don't carry over
+            _npcs.Clear();
+            
             for (int i = 0; i < NumberOfInteractiveNpcs; i++)
             {
                 Npc npc = GenerateNpc();

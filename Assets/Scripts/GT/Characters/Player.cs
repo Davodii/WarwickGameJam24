@@ -42,6 +42,11 @@ namespace GT.Characters
         public ECloudChartStatus GetCloudChartStatus() { return _cloudChart.GetStatus(); }
         public void ModifyCloudChart(int delta) { _cloudChart.Modify(delta); }
         
+        public void ResetCloudChart(int dailyStartCloudChart)
+        {
+            _cloudChart.Modify(dailyStartCloudChart - _cloudChart.Get());
+        }
+        
         #endregion
 
         #region Cards
@@ -49,6 +54,8 @@ namespace GT.Characters
         public void GiveCard(Card card) { _deck.AddCard(card); }
         
         public void RemoveCard(Card card) { _deck.RemoveCard(card); }
+
+        public int GetDeckValue() { return _deck.GetDeckValue(); }
         
         public void GiveCardToTeacher(Teacher teacher, Card card)
         {
