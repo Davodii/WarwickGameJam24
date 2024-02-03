@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 791d82f77c777fd46999c01a6bfdf0e7
+guid: 1f63cae5775190541a7f5d029011a593
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: example-UI
+  - name: item-hotbar
     originalName: 
-    pivot: {x: 0.47769314, y: 0}
+    pivot: {x: 0.5026042, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 1838
-      height: 1072
-    spriteID: 974c54ce1bdab4c4f99778f3a62edb1a
+      width: 960
+      height: 129
+    spriteID: d6b410b285fce484aa43c07ce2b12d8f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,24 +144,24 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1486799909
-    name: example-UI
+    guid: 2046953248
+    name: item-hotbar
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: example-UI
+    - name: item-hotbar
       frameIndex: 0
       cellRect:
-        x: 82
+        x: 8
         y: 0
-        width: 1838
-        height: 1072
-      spriteId: 974c54ce1bdab4c4f99778f3a62edb1a
+        width: 960
+        height: 129
+      spriteId: d6b410b285fce484aa43c07ce2b12d8f
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 1920, y: 1080}
+  canvasSize: {x: 981, y: 144}

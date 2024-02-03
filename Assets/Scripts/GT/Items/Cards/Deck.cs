@@ -40,5 +40,10 @@ namespace GT.Items.Cards
             // reduction on the list
             return _cards.Aggregate(0, (sum, nextCard) => sum + (int)nextCard.GetValue());
         }
+
+        public int NumberOfCard(Card card)
+        {
+            return _cards.FindAll(x => x.Equals(card)).Count;
+        }
     }
 }

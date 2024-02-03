@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 791d82f77c777fd46999c01a6bfdf0e7
+guid: d58dc447c9ff04d4092e8f4c253880b5
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: example-UI
+  - name: cloud-chart-wheel
     originalName: 
-    pivot: {x: 0.47769314, y: 0}
+    pivot: {x: 0.49541283, y: -0.08181818}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 1838
-      height: 1072
-    spriteID: 974c54ce1bdab4c4f99778f3a62edb1a
+      width: 218
+      height: 220
+    spriteID: dd9b3fafa686f4b43acdf62e2f4a1bb5
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,24 +144,24 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1486799909
-    name: example-UI
+    guid: -1967574036
+    name: cloud-chart-wheel
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: example-UI
+    - name: cloud-chart-wheel
       frameIndex: 0
       cellRect:
-        x: 82
-        y: 0
-        width: 1838
-        height: 1072
-      spriteId: 974c54ce1bdab4c4f99778f3a62edb1a
+        x: 20
+        y: 18
+        width: 218
+        height: 220
+      spriteId: dd9b3fafa686f4b43acdf62e2f4a1bb5
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 1920, y: 1080}
+  canvasSize: {x: 256, y: 256}

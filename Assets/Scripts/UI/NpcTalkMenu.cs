@@ -173,7 +173,7 @@ namespace UI
             speech.text = GenerateString();
             
             // Delete any Trade icons generated
-            foreach (var group in tradeSection.gameObject.GetComponentsInChildren<TradeGroup>())
+            foreach (var group in tradeSection.gameObject.GetComponentsInChildren<ItemUIGroup>())
             {
                 DestroyImmediate(group.gameObject);
             }

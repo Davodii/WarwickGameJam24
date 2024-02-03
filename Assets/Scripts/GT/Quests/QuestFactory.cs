@@ -11,11 +11,19 @@ namespace GT.Quests
     public class QuestFactory
     {
         private readonly Random _rng;
-        private readonly List<Npc> _npcs;
+        private List<Npc>? _npcs = null;
         
-        public QuestFactory(Random rng, List<Npc> npcs)
+        public QuestFactory(Random rng)
         {
             _rng = rng;
+        }
+        
+        /// <summary>
+        /// This must happen before generation.
+        /// </summary>
+        /// <param name="npcs">List of interactive NPCs in the game.</param>
+        public void SetNpcs(List<Npc> npcs)
+        {
             _npcs = npcs;
         }
         
@@ -29,7 +37,11 @@ namespace GT.Quests
 
         public Quest? CreateQuest()
         {
-            // TODO: actual randomness
+            if (_npcs == null)
+            {
+                throw new Exception("Must attach a list of NPCs to work with.");
+            }
+            
             int randomNumber = _rng.Next(100);
 
             if (randomNumber < 50)

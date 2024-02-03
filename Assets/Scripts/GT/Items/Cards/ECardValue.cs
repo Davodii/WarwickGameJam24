@@ -5,10 +5,10 @@ namespace GT.Items.Cards
         // maybe these should be given more game-y names
         // set the values of the cards like this to make their
         // integer values easier to work with
-        _1 = 1,
-        _2 = 2,
-        _3 = 3,
-        _4 = 4,
-        _5 = 5
+        _1 = 0,
+        _2 = 1,
+        _3 = 2,
+        _4 = 3,
+        _5 = 4
     }
 }

@@ -71,7 +71,7 @@ namespace Behaviours
                         Trade trade = new Trade(rewards, requirements);
                         
                         // Quest
-                        BullyQuest quest = new BullyQuest("Plss bully this kid called PENIS HEAD",
+                        BullyQuest quest = new BullyQuest("Plss bully this kid called <color='red'>PENIS HEAD!!?!</color>",
                             "thx, really needed that :)", new List<Npc>() { empty }, rewards);
                         
                         // Initialize npc and talk menu
