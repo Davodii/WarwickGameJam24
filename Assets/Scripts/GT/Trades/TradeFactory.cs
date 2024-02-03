@@ -21,7 +21,7 @@ namespace GT.Trades
         /// Generate a random trade based on the inputs
         /// </summary>
         /// <returns></returns>
-        public Trade CreateRandomTrade()
+        public Trade CreateTrade()
         {
             // TODO: introduce some way of making trades more/less "expensive"
             Dictionary<IItem, int> items = new Dictionary<IItem, int>();
@@ -29,7 +29,7 @@ namespace GT.Trades
 
             // Add random items
             items.Add(new Card(ECardValue._1), 1);
-            items.Add(new Money(5), 1);
+            price.Add(new Money(5), 1);
             
             Trade trade = new Trade(items, price);
             

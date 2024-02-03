@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using GT.Items;
 using GT.Items.Cards;
-using GT.Items.GoldenTimeMinutes;
+using GT.Items.CloudChartPoints;
 
 namespace GT.Characters
 {
@@ -13,10 +14,10 @@ namespace GT.Characters
         /// </summary>
         /// <param name="card">The card object to deposit.</param>
         /// <returns>The value of the card as minutes of golden time</returns>
-        public GoldenTimeMinutes GiveCard(Card card)
+        public IItem GiveCard(Card card)
         {
             _cards.Add(card);
-            return new GoldenTimeMinutes((int)card.GetValue());
+            return new CloudChartPoints((int)card.GetValue());
         }
     }
 }

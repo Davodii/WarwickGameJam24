@@ -8,5 +8,10 @@ namespace GT.Counters
         public Wallet() : base(Initial, MinValue, MaxValue)
         {
         }
+
+        public void Clear()
+        {
+            base.Modify(-1  * Get()); // set wallet to 0
+        }
     }
 }

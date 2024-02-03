@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GT.Characters;
+using GT.Characters.Npcs;
 using GT.Items;
 
 namespace GT.Quests.Concrete
