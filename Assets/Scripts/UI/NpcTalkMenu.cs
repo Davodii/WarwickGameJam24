@@ -1,6 +1,7 @@
 using System;
 using GT;
 using GT.Characters;
+using GT.Characters.Npcs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;

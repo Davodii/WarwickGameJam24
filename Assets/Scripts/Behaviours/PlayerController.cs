@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using GT.Characters;
+using GT.Characters.Npcs;
 using GT.Items;
 using GT.Items.Cards;
 using GT.Items.Money;
@@ -61,7 +62,7 @@ namespace Behaviours
                     if (talkMenu != null)
                     {
                         // Generate a random npc
-                        Npc empty = new Npc("empty", null, null);
+                        Npc empty = new Npc("empty", null, null, null);
                         
                         // Trade
                         Dictionary<IItem, int> rewards = new Dictionary<IItem, int>();
@@ -75,7 +76,7 @@ namespace Behaviours
                             "thx, really needed that :)", new List<Npc>() { empty }, rewards);
                         
                         // Initialize npc and talk menu
-                        Npc rando = new Npc("Rando Bob", trade, quest);
+                        Npc rando = new Npc("Rando Bob", trade, quest, null);
                         talkMenu.SetNpc(rando);
                         talkMenu.EnableMenu();
                     }

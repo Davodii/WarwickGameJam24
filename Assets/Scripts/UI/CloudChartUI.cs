@@ -11,18 +11,34 @@ namespace UI
         [SerializeField] private RectTransform needleTransform;
         [SerializeField] private Slider slider;
 
+        private Game _game;
+
+        public void Awake()
+        {
+            _game = Game.GetInstance();
+        }
+
         public void FixedUpdate()
         {
             // Get the value
-            //TODO: Substitute this with player cloud chart
-            float value =  slider.value / 100f;
-            //TODO: idk
-            float degree = GetDegree(1 - value);
+            
+            //
+            // var value = _game.GetPlayer().GetCloudChartValue() / 100f;
+            //
+            
+            // TESTING CODE
+            var value =  slider.value / 100f;
+           
+            
+            var degree = GetDegree(1 - value);
             
             // Adjust needle
             var eulerAngles = needleTransform.eulerAngles;
-            eulerAngles =
-                new Vector3(eulerAngles.x, eulerAngles.y, degree);
+            eulerAngles = new Vector3(
+                eulerAngles.x,
+                eulerAngles.y,
+                degree);
+            
             needleTransform.eulerAngles = eulerAngles;
         }
 

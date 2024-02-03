@@ -84,5 +84,10 @@ namespace GT.Quests
 
             return result;
         }
+
+        public string GetRequest()
+        {
+            return _request;
+        }
     }
 }
