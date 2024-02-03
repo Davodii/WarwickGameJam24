@@ -1,12 +1,10 @@
-using System;
-using GT;
-using GT.Characters;
 using GT.Characters.Npcs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = System.Random;
 
-namespace UI
+namespace UI.NpcInteractionMenu
 {
     public class NpcTalkMenu : MonoBehaviour
     {
@@ -14,25 +12,39 @@ namespace UI
         // Enable the menu 
         // Change the text/properties of each element
 
-        [FormerlySerializedAs("name")]
-        [Header("Text")]
-        [SerializeField] private TMP_Text npcName;
+        [FormerlySerializedAs("name")] [Header("Text")] [SerializeField]
+        private TMP_Text npcName;
+
         [SerializeField] private TMP_Text speech;
 
-        [Header("Trading")] 
-        [SerializeField] private TradeSectionContextMenu tradeSection;
+        [Header("Trading")] [SerializeField] private TradeSectionContextMenu tradeSection;
 
-        [FormerlySerializedAs("buttonSection")]
-        [Header("Buttons")] 
-        [SerializeField] private GameObject initialButtons;
+        [FormerlySerializedAs("buttonSection")] [Header("Buttons")] [SerializeField]
+        private GameObject initialButtons;
+
         [SerializeField] private GameObject tradeButtons;
         [SerializeField] private GameObject questButtons;
 
-        [Header("Misc.")] 
-        [SerializeField] private GameObject background;
-        
+        [Header("Misc.")] [SerializeField] private GameObject background;
+
         // Privates
         private Npc _npc;
+        
+        private readonly string[] _noTradeResponses = new[]
+        {
+            "Sorry, I don't have anything.",
+            "Go away.",
+            "I don't want to give you anything.",
+            "<color=\"red\">Fuck off!</color>"
+        };
+        
+        private readonly string[] _noQuestResponses = new[]
+        {
+            "Sorry, I don't have anything.",
+            "Go away.",
+            "I don't want to give you anything.",
+            "<color=\"blue\">Why are you like this??</color>"
+        };
 
         public void EnableMenu()
         {
@@ -72,10 +84,10 @@ namespace UI
             // Called externally by the "see trade" button
             
             // Check if there is no trade
-            if (!_npc.HasQuest())
+            if (!_npc.HasTrade())
             {
-                //TODO: Auto generate this
-                speech.text = "Fuck off I don't have anything for you";
+                Random rand = new Random();
+                speech.text = _noTradeResponses[rand.Next(_noTradeResponses.Length)];
                 return;
             }
             
@@ -122,11 +134,12 @@ namespace UI
             //      - this can turn into a "complete quest" button after the quest is accepted
             
             // Check if there is no quest
-            Debug.Log(_npc.HasQuest());
+            // Check if there is no quest
+            
             if (!_npc.HasQuest())
             {
-                //TODO: Auto generate this
-                speech.text = "What the hell am i supposed to tell you to do?";
+                Random rand = new Random();
+                speech.text = _noQuestResponses[rand.Next(_noQuestResponses.Length)];
                 return;
             }
             
