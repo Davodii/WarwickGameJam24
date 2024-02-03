@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 791d82f77c777fd46999c01a6bfdf0e7
+guid: 05ed166ef064f0e499de9df91d9d1e3e
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: example-UI
+  - name: character-context-menu-bg
     originalName: 
-    pivot: {x: 0.47769314, y: 0}
+    pivot: {x: 0.4834437, y: -0.0967742}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 1838
-      height: 1072
-    spriteID: 974c54ce1bdab4c4f99778f3a62edb1a
+      width: 453
+      height: 744
+    spriteID: f13d1139747687048bd3ad1918e5c48e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,24 +144,24 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1486799909
-    name: example-UI
+    guid: 1537354489
+    name: character-context-menu-bg
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: example-UI
+    - name: character-context-menu-bg
       frameIndex: 0
       cellRect:
-        x: 82
-        y: 0
-        width: 1838
-        height: 1072
-      spriteId: 974c54ce1bdab4c4f99778f3a62edb1a
+        x: 81
+        y: 72
+        width: 453
+        height: 744
+      spriteId: f13d1139747687048bd3ad1918e5c48e
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 1920, y: 1080}
+  canvasSize: {x: 600, y: 900}

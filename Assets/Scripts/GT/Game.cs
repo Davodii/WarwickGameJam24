@@ -166,7 +166,14 @@ namespace GT
                 .GenerateBullyRewards()
                 .Build();
         }
-        
+
+
+        public Player GetPlayer()
+        {
+            return _player;
+        }
+     
         #endregion
+
     }
 }

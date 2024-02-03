@@ -66,6 +66,11 @@ namespace GT.Characters
         {
             return _deck.Contains(card);
         }
+
+        public int NumberOfCard(Card card)
+        { 
+            return _deck.NumberOfCard(card);
+        }
         
         #endregion
         
