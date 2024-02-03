@@ -35,6 +35,11 @@ namespace GT.Characters
         {
             return _deck.Contains(card);
         }
+
+        public int NumberOfCard(Card card)
+        { 
+            return _deck.NumberOfCard(card);
+        }
         
         public int GetGoldenTime() { return _goldenTime.Get(); }
         public void ModifyGoldenTime(int delta) { _goldenTime.Modify(delta); }
