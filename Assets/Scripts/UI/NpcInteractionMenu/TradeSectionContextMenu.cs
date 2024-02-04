@@ -1,13 +1,12 @@
 using GT.Items;
 using UnityEngine;
 
-namespace UI
+namespace UI.NpcInteractionMenu
 {
     public class TradeSectionContextMenu : MonoBehaviour
     {
         [SerializeField] private GameObject tradeGroup;
         [SerializeField] private GameObject leftPanel;
-        [SerializeField] private GameObject middlePanel;
         [SerializeField] private GameObject rightPanel;
 
         public void AddRequest(IItem item, int count)

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GT.Items;
+using GT.Items.Cards;
+using GT.Items.Misc;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,8 +26,8 @@ namespace UI
         [Header("Items")] [SerializeField] private List<ItemToSprite> itemToSpriteMapping;
 
         private Random _rng;
-        private IItem _item;
-        private int _count;
+        private IItem _item = null;
+        private int _count = 0;
 
         public void SetItem(IItem item, int count)
         {
@@ -37,7 +39,7 @@ namespace UI
                 itemCount.gameObject.SetActive(true);
 
                 // Ensure the item and count is different
-                if (!(_item.Equals(item) && _count == count))
+                if (_item == null || !(_item.Equals(item) && _count == count))
                 {
                     // Generate texture of sprite of item
                     Sprite correspondingSprite = GetSprite(item);
@@ -98,12 +100,19 @@ namespace UI
                 availableSprites.AddRange(mapping.GetSprites());
             }
             
+            // Get the sprite depending on the item type
             if (type == EItemType.Card)
             {
                 // Use the card enum to get the corresponding sprite
-                sprite = availableSprites[(int)item.GetItemType() * 3 + _rng.Next(3)];
+                Card card = (Card)item;
+                sprite = availableSprites[(int)card.GetValue() * 3 + _rng.Next(3)];
             }
-            else
+            else if(type == EItemType.Misc)
+            {
+                // TODO: make this work with actual misc items
+                var miscItem = (MiscItem) item;
+                sprite = availableSprites[_rng.Next(availableSprites.Count) + (int)miscItem.GetMiscItemType()];
+            } else
             {
                 sprite = availableSprites[_rng.Next(availableSprites.Count)];
             }

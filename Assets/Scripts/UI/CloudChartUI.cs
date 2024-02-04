@@ -1,7 +1,5 @@
-using System;
 using GT;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI
 {
@@ -9,20 +7,32 @@ namespace UI
     {
         // Get the current cloud chart status
         [SerializeField] private RectTransform needleTransform;
-        [SerializeField] private Slider slider;
+        private int _previousValue;
+
+        private Game _game;
+
+        public void Awake()
+        {
+            _game = Game.GetInstance();
+        }
 
         public void FixedUpdate()
         {
-            // Get the value
-            //TODO: Substitute this with player cloud chart
-            float value =  slider.value / 100f;
-            //TODO: idk
-            float degree = GetDegree(1 - value);
+            var currentValue = _game.GetPlayer().GetCloudChartValue();
+            if (_previousValue == currentValue) return;
+            
+            // Get the cloud chart value
+            _previousValue = currentValue;
+            var value = currentValue / 100f;
+            var degree = GetDegree(1 - value);
             
             // Adjust needle
             var eulerAngles = needleTransform.eulerAngles;
-            eulerAngles =
-                new Vector3(eulerAngles.x, eulerAngles.y, degree);
+            eulerAngles = new Vector3(
+                eulerAngles.x,
+                eulerAngles.y,
+                degree);
+            
             needleTransform.eulerAngles = eulerAngles;
         }
 
