@@ -7,6 +7,7 @@ using GT.Items;
 using GT.Items.Blood;
 using GT.Items.Cards;
 using GT.Items.GoldenTimeMinutes;
+using UnityEngine;
 
 namespace GT.Characters
 {

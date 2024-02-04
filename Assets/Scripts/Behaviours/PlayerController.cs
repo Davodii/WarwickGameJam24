@@ -17,6 +17,7 @@ namespace Behaviours
         //      enable/disable UI elements
         [Header("UI")] 
         [SerializeField] private NpcTalkMenu talkMenu;
+        [SerializeField] private InteractionPopup interactionPopup;
         
         // Privates
         private Rigidbody2D _rb2d;
@@ -59,15 +60,17 @@ namespace Behaviours
                 "Item" => EPlayerInteractionState.Item,
                 _ => _interactionState
             };
+            
+            interactionPopup.TrackObject(other.transform);
         }
 
         public void OnTriggerExit2D(Collider2D other)
         {
-            if (other.gameObject.layer == 8) /* Interactable */
-            {
-                _interactable = null;
-                _interactionState = EPlayerInteractionState.None;
-            }
+            if (other.gameObject.layer != 8 /* Interactable */) return;
+            _interactable = null;
+            _interactionState = EPlayerInteractionState.None;
+                
+            interactionPopup.StopTracking();
         }
 
         public void Update()
@@ -77,21 +80,23 @@ namespace Behaviours
             {
                 talkMenu.DisableMenu();
             }
-
             if (!Input.GetKeyDown(KeyCode.E)) return;
+            Debug.Log("E pressed");
             switch (_interactionState)
             {
                 case EPlayerInteractionState.None:
+                    Debug.Log("No interaction");
                     return;
                 case EPlayerInteractionState.Npc:
                 {
+                    Debug.Log("NPC interaction");
                     var npc = _interactable.GetComponent<InteractableNpc>().GetNpc();
                     talkMenu.EnableMenu();
                     talkMenu.SetNpc(npc);
                     break;
                 }
                 case EPlayerInteractionState.Item:
-                    //TODO: Attach interactable item componenet to gameobjecty
+                    Debug.Log("Item interaction");
                     var item = _interactable.GetComponent<InteractableItem>();
                     item.CollectItem();
                     break;
