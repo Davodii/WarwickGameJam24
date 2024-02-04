@@ -1,13 +1,7 @@
 using System;
-using System.Collections.Generic;
-using GT.Characters;
-using GT.Characters.Npcs;
-using GT.Items;
-using GT.Items.Cards;
-using GT.Items.Money;
-using GT.Quests.Concrete;
-using GT.Trades;
+using Behaviours.Interactable;
 using UI;
+using UI.NpcInteractionMenu;
 using UnityEngine;
 
 namespace Behaviours
@@ -26,6 +20,8 @@ namespace Behaviours
         
         // Privates
         private Rigidbody2D _rb2d;
+        private EPlayerInteractionState _interactionState;
+        private GameObject _interactable;
         
         public void Awake()
         {
@@ -50,48 +46,57 @@ namespace Behaviours
             // Move the player
             _rb2d.MovePosition(newPosition);
         }
-
-        //TODO: remove everything after this comment
-        public void OnTriggerStay2D(Collider2D other)
+        
+        public void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.tag.Equals("NPC"))
+            if (other.gameObject.layer != 8 /* Interactable */) return;
+            
+            var o = other.gameObject;
+            _interactable = o;
+            _interactionState = o.tag switch
             {
-                // Player is in NPC talk range
-                if (Input.GetKey(KeyCode.E))
-                {
-                    if (talkMenu != null)
-                    {
-                        // Generate a random npc
-                        Npc empty = new Npc("empty", null, null, null);
-                        
-                        // Trade
-                        Dictionary<IItem, int> rewards = new Dictionary<IItem, int>();
-                        rewards.Add(new Card(ECardValue._1), 2);
-                        Dictionary<IItem, int> requirements = new Dictionary<IItem, int>();
-                        requirements.Add(new Money(100), 10);
-                        Trade trade = new Trade(rewards, requirements);
-                        
-                        // Quest
-                        BullyQuest quest = new BullyQuest("Plss bully this kid called <color='red'>PENIS HEAD!!?!</color>",
-                            "thx, really needed that :)", new List<Npc>() { empty }, rewards);
-                        
-                        // Initialize npc and talk menu
-                        Npc rando = new Npc("Rando Bob", trade, quest, null);
-                        talkMenu.SetNpc(rando);
-                        talkMenu.EnableMenu();
-                    }
-                }
+                "NPC" => EPlayerInteractionState.Npc,
+                "Item" => EPlayerInteractionState.Item,
+                _ => _interactionState
+            };
+        }
+
+        public void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.gameObject.layer == 8) /* Interactable */
+            {
+                _interactable = null;
+                _interactionState = EPlayerInteractionState.None;
             }
         }
 
         public void Update()
         {
+            if (talkMenu == null) return;
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (talkMenu != null)
+                talkMenu.DisableMenu();
+            }
+
+            if (!Input.GetKeyDown(KeyCode.E)) return;
+            switch (_interactionState)
+            {
+                case EPlayerInteractionState.None:
+                    return;
+                case EPlayerInteractionState.Npc:
                 {
-                    talkMenu.DisableMenu();
+                    var npc = _interactable.GetComponent<InteractableNpc>().GetNpc();
+                    talkMenu.EnableMenu();
+                    talkMenu.SetNpc(npc);
+                    break;
                 }
+                case EPlayerInteractionState.Item:
+                    //TODO: Attach interactable item componenet to gameobjecty
+                    var item = _interactable.GetComponent<InteractableItem>();
+                    item.CollectItem();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }

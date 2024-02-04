@@ -107,11 +107,14 @@ namespace UI
                 Card card = (Card)item;
                 sprite = availableSprites[(int)card.GetValue() * 3 + _rng.Next(3)];
             }
-            else
+            else if(type == EItemType.Misc)
             {
-                // TODO: make this work with acutal misc items
+                // TODO: make this work with actual misc items
                 var miscItem = (MiscItem) item;
                 sprite = availableSprites[_rng.Next(availableSprites.Count) + (int)miscItem.GetMiscItemType()];
+            } else
+            {
+                sprite = availableSprites[_rng.Next(availableSprites.Count)];
             }
 
             return sprite;
