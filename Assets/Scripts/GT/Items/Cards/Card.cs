@@ -5,6 +5,7 @@ namespace GT.Items.Cards
 {
     public class Card : IItem
     {
+        private const int HashDispersionMultiplier = 500;
         private readonly ECardValue _value;
 
         public Card(ECardValue value)
@@ -43,6 +44,11 @@ namespace GT.Items.Cards
         public void Remove(Player player)
         {
             player.RemoveCard(this);
+        }
+
+        public override int GetHashCode()
+        {
+            return (int)GetItemType() * HashDispersionMultiplier;
         }
     }
 }
