@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using GT.Items;
 using GT.Items.Blood;
 using GT.Quests;
@@ -94,6 +95,12 @@ namespace GT.Characters.Npcs
         public override string ToString()
         {
             return _name;
+        }
+
+        public override int GetHashCode()
+        {
+            // just sum the char values of the characters in the NPC's name
+            return _name.Aggregate(0, (h, c) => h + c);
         }
     }
 }
