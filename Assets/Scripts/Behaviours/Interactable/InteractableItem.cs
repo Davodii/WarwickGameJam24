@@ -3,6 +3,7 @@ using GT;
 using GT.Items;
 using GT.Items.Cards;
 using GT.Items.Misc;
+using GT.Items.Money;
 using UI.SpriteManager;
 using UnityEngine;
 
@@ -10,6 +11,9 @@ namespace Behaviours.Interactable
 {
     public class InteractableItem : MonoBehaviour
     {
+        
+        // Assume if the item is money, then the money amount is stored 
+        // within the money object and count is 1.
         private Game _game;
         private IItem _item;
         private int _count;
@@ -48,18 +52,18 @@ namespace Behaviours.Interactable
                 for (int i = 0; i < _count; i++)
                 {
                     Debug.Log("Collected card");
-                    player.GiveCard((Card)_item);
+                    ((Card)_item).Give(player);
                 }
             } else if (_item.GetItemType() == EItemType.Money)
             {
                 Debug.Log("Collected money");
-                player.ModifyMoney(_count);
+                ((Money)_item).Give(player);
             } else if (_item.GetItemType() == EItemType.Misc)
             {
                 for (int i = 0; i < _count; i++)
                 {
                     Debug.Log("Collected misc item");
-                    player.GiveItem(_item);
+                    ((MiscItem)_item).Give(player);
                 }
             }
             

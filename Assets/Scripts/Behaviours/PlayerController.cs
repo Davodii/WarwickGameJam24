@@ -1,5 +1,7 @@
 using System;
 using Behaviours.Interactable;
+using GT;
+using GT.Items.Misc;
 using UI;
 using UI.NpcInteractionMenu;
 using UnityEngine;
@@ -14,7 +16,7 @@ namespace Behaviours
     
         
         //TODO: Setup a UI manager that the player can use to 
-        //      enable/disable UI elements
+        // enable/disable UI elements
         [Header("UI")] 
         [SerializeField] private NpcTalkMenu talkMenu;
         [SerializeField] private InteractionPopup interactionPopup;
@@ -46,6 +48,8 @@ namespace Behaviours
             
             // Move the player
             _rb2d.MovePosition(newPosition);
+            
+            Debug.Log(Game.GetInstance().GetPlayer().NumberOfItem(new MiscItem(EMiscItemType.Rock)));
         }
         
         public void OnTriggerEnter2D(Collider2D other)
@@ -58,6 +62,7 @@ namespace Behaviours
             {
                 "NPC" => EPlayerInteractionState.Npc,
                 "Item" => EPlayerInteractionState.Item,
+                "Teacher" => EPlayerInteractionState.Teacher,
                 _ => _interactionState
             };
             
@@ -99,6 +104,10 @@ namespace Behaviours
                     Debug.Log("Item interaction");
                     var item = _interactable.GetComponent<InteractableItem>();
                     item.CollectItem();
+                    break;
+                case EPlayerInteractionState.Teacher:
+                    // Bring up the teacher UI to trade cards
+                    Debug.LogWarning("Teacher UI not implemented yet...");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using GT;
-using GT.Items.Cards;
 using GT.Items.Misc;
 using UnityEngine;
 
@@ -20,8 +19,8 @@ namespace UI
 
         public void FixedUpdate()
         {
-            //TODO: only update the ui when the player's invenotry changes
-            //TODO: FIX THIS
+            //TODO: only update the ui when the player's inventory changes
+            //TODO: FIX THIS <===
             
             // Get the player's items and assign to the inventory slots
             // Cards

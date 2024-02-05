@@ -4,6 +4,7 @@ namespace Behaviours
     {
         None,
         Npc,
+        Teacher,
         Item
     }
 }

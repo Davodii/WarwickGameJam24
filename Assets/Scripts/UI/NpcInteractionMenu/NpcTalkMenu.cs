@@ -1,3 +1,4 @@
+using GT;
 using GT.Characters.Npcs;
 using TMPro;
 using UnityEngine;
@@ -29,7 +30,9 @@ namespace UI.NpcInteractionMenu
 
         // Privates
         private Npc _npc;
+        private Game _game;
         
+        //TODO: Make this betterer
         private readonly string[] _noTradeResponses = new[]
         {
             "Sorry, I don't have anything.",
@@ -154,9 +157,14 @@ namespace UI.NpcInteractionMenu
 
         public void AcceptQuest()
         {
-            // Check if can complete quest
+            // Add the quest to the player if not added before
+            // return
             
-            
+            // Check if player has met requirements and complete quest
+            // remove requirements from the player
+            // add rewards to the player
+
+
         }
 
         public void Bully()
@@ -195,6 +203,8 @@ namespace UI.NpcInteractionMenu
 
         public void Awake()
         {
+            _game = Game.GetInstance();
+            
             DisableMenu();
         }
 
@@ -217,8 +227,6 @@ namespace UI.NpcInteractionMenu
             npcName.text = _npc.ToString();
             //TODO: "Conversation dialogue" generation
             speech.text = GenerateString();
-            
-            
         }
         
         

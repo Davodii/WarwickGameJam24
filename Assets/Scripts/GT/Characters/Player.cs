@@ -96,14 +96,19 @@ namespace GT.Characters
 
         public void GiveItem(IItem item)
         {
+            Debug.Log("ITEM HAS BEEN GIVEN");
             if (HasItem(item))
             {
+                Debug.Log("item already aqquired adding it now");
                 _miscItems[item]++;
             }
             else
             {
+                Debug.Log("Added new item");
                 _miscItems.Add(item, 1);
             }
+            
+            Debug.Log("Misc items count: " + _miscItems.Count);
         }
         
         public void RemoveItem(IItem item)
