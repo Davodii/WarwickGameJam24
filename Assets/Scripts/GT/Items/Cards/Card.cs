@@ -48,7 +48,7 @@ namespace GT.Items.Cards
 
         public override int GetHashCode()
         {
-            return (int)GetItemType() * HashDispersionMultiplier;
+            return ((int)GetItemType() * HashDispersionMultiplier) + (int)_value;
         }
     }
 }

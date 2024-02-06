@@ -3,7 +3,7 @@ using Behaviours.Interactable;
 using GT;
 using GT.Items.Misc;
 using UI;
-using UI.NpcInteractionMenu;
+using UI.Interactions;
 using UnityEngine;
 
 namespace Behaviours
@@ -20,6 +20,7 @@ namespace Behaviours
         [Header("UI")] 
         [SerializeField] private NpcTalkMenu talkMenu;
         [SerializeField] private InteractionPopup interactionPopup;
+        [SerializeField] private TeacherInteractionMenu teacherInteractionMenu;
         
         // Privates
         private Rigidbody2D _rb2d;
@@ -49,7 +50,6 @@ namespace Behaviours
             // Move the player
             _rb2d.MovePosition(newPosition);
             
-            Debug.Log(Game.GetInstance().GetPlayer().NumberOfItem(new MiscItem(EMiscItemType.Rock)));
         }
         
         public void OnTriggerEnter2D(Collider2D other)
@@ -80,10 +80,10 @@ namespace Behaviours
 
         public void Update()
         {
-            if (talkMenu == null) return;
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 talkMenu.DisableMenu();
+                teacherInteractionMenu.DisableMenu();
             }
             if (!Input.GetKeyDown(KeyCode.E)) return;
             Debug.Log("E pressed");
@@ -96,8 +96,8 @@ namespace Behaviours
                 {
                     Debug.Log("NPC interaction");
                     var npc = _interactable.GetComponent<InteractableNpc>().GetNpc();
-                    talkMenu.EnableMenu();
                     talkMenu.SetNpc(npc);
+                    talkMenu.EnableMenu();
                     break;
                 }
                 case EPlayerInteractionState.Item:
@@ -107,7 +107,8 @@ namespace Behaviours
                     break;
                 case EPlayerInteractionState.Teacher:
                     // Bring up the teacher UI to trade cards
-                    Debug.LogWarning("Teacher UI not implemented yet...");
+                    Debug.Log("Teacher Interaction");
+                    teacherInteractionMenu.EnableMenu();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

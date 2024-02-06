@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace GT.Items.Cards
 {
@@ -23,15 +24,25 @@ namespace GT.Items.Cards
         public void RemoveCard(Card card)
         {
             // requires some sort of comparison between cards
-            if (!_cards.Remove(card))
+            //if (!_cards.Remove(card))
+            //{
+            //    throw new Exception("Can't remove non-existent card.");
+            //}
+            
+            // Try remove card
+            if (!Contains(card))
             {
                 throw new Exception("Can't remove non-existent card.");
             }
+            
+            // Remove from list without Remove()
+            var first = _cards.First(x => x.Equals(card));
+            _cards.Remove(first);
         }
 
         public bool Contains(Card card)
         {
-            return _cards.Contains(card);
+            return _cards.Any(c => c.Equals(card));
         }
 
         public int GetDeckValue()

@@ -1,7 +1,7 @@
 using GT.Items;
 using UnityEngine;
 
-namespace UI.NpcInteractionMenu
+namespace UI.Interactions
 {
     public class TradeSectionContextMenu : MonoBehaviour
     {
@@ -15,7 +15,7 @@ namespace UI.NpcInteractionMenu
             // Set item to trade group
             GameObject newGroup = Instantiate(tradeGroup, leftPanel.transform, false);
             newGroup.name = "Request Group";
-            newGroup.GetComponent<ItemUIGroup>().SetItem(item, count);
+            newGroup.GetComponent<ItemUIGroup>().SetItem(item, count, true);
         }
 
         public void AddReward(IItem item, int count)
@@ -23,7 +23,7 @@ namespace UI.NpcInteractionMenu
             // Add icon for reward
             GameObject newGroup = Instantiate(tradeGroup, rightPanel.transform, false);
             newGroup.name = "Reward Group";
-            newGroup.GetComponent<ItemUIGroup>().SetItem(item, count);
+            newGroup.GetComponent<ItemUIGroup>().SetItem(item, count, true);
         }
     }
 }

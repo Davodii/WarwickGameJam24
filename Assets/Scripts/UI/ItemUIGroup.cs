@@ -27,30 +27,32 @@ namespace UI
         private SpriteManager.SpriteManager _spriteManager;
         private Random _rng;
         private IItem _item = null;
-        private int _count = 0;
+        private int _count = -1;
 
-        public void SetItem(IItem item, int count)
+        public void SetItem(IItem item, int count, bool changeIcon)
         {
             // Set the correct UI for the item and the count
             if (item != null)
             {
+                
                 // Ensure gameobjects are enabled
                 itemSprite.gameObject.SetActive(true);
                 itemCount.gameObject.SetActive(true);
 
                 // Ensure the item and count is different
-                if (_item == null || !(_item.Equals(item) && _count == count))
+                if (_item != null && (_item.Equals(item) && _count == count)) return;
+                if (changeIcon)
                 {
                     // Generate texture of sprite of item
                     var correspondingSprite = _spriteManager.GetSpriteFromItem(item, true);
                     var texture = SpriteToTexture2D(correspondingSprite);
                     itemSprite.texture = texture;
                     _item = item;
-
-                    // Set count text
-                    _count = count;
-                    itemCount.text = "x" + _count.ToString();
                 }
+
+                // Set count text
+                _count = count;
+                itemCount.text = "x" + _count.ToString();
             }
             else
             {
@@ -59,6 +61,16 @@ namespace UI
                 itemSprite.gameObject.SetActive(false);
                 itemCount.gameObject.SetActive(false);
             }
+        }
+
+        public IItem GetItem()
+        {
+            return _item;
+        }
+
+        public int GetCount()
+        {
+            return _count;
         }
 
         public void Awake()

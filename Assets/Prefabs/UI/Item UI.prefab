@@ -269,33 +269,6 @@ MonoBehaviour:
   background: {fileID: 5154810324585135116}
   itemSprite: {fileID: 5799707229515045159}
   itemCount: {fileID: 8653865596718173268}
-  itemToSpriteMapping:
-  - _sprites:
-    - {fileID: 871910860, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    - {fileID: -921331066, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    - {fileID: -760028699, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    _type: 0
-  - _sprites:
-    - {fileID: 1602192891, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    - {fileID: 633484797, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    - {fileID: 1394370838, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    - {fileID: -997930380, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    - {fileID: -2123427568, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    - {fileID: -1394842175, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    - {fileID: 309535484, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    - {fileID: 1079525819, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    - {fileID: 956447124, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    - {fileID: 823075991, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    - {fileID: -1604179715, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    - {fileID: -1000381582, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    - {fileID: 719252060, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    - {fileID: -1029695639, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    - {fileID: 1843263848, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    _type: 3
-  - _sprites:
-    - {fileID: 1637900444, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    - {fileID: -47823178, guid: c4b9b105236570e45a62cade29782f7a, type: 3}
-    _type: 5
 --- !u!1 &6374951113678319956
 GameObject:
   m_ObjectHideFlags: 0

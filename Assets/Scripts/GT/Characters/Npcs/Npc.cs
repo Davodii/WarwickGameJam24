@@ -77,16 +77,19 @@ namespace GT.Characters.Npcs
         public void GetBullied(Player player)
         {
             // Add items in trade to the player
-            foreach (var pair in _bullyRewards)
+            if (_bullyRewards != null)
             {
-                IItem item = pair.Key;
-                int count = pair.Value;
-                for (int i = 0; i < count; i++)
+                foreach (var pair in _bullyRewards)
                 {
-                    item.Give(player);
+                    IItem item = pair.Key;
+                    int count = pair.Value;
+                    for (int i = 0; i < count; i++)
+                    {
+                        item.Give(player);
+                    }
                 }
             }
-            
+
             // give the player a Blood object to prove they
             // have bullied this NPC
             new Blood(this).Give(player);

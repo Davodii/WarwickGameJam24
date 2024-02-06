@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GT.Items;
+using GT.Items.Cards;
 using GT.Items.Misc;
 using UnityEngine;
 using Random = System.Random;
@@ -29,39 +30,26 @@ namespace UI.SpriteManager
         /// <returns></returns>
         public Sprite GetSpriteFromItem(IItem item, bool randomSprite)
         {
-            if (item.GetItemType() == EItemType.Misc)
-            {
-                return GetMiscSprite(item, randomSprite);
-            }
-
-            return GetSprite(item, randomSprite);
+            return item.GetItemType() == EItemType.Misc ? GetMiscSprite(item, randomSprite) : GetSprite(item, randomSprite);
         }
 
         private Sprite GetMiscSprite(IItem item, bool randomSprite)
         {
-            foreach (var mapping in miscItemSpriteMappings.Where(mapping => mapping.GetType() == ((MiscItem)item).GetMiscItemType()))
-            {
-                if (randomSprite)
-                {
-                    return mapping.GetSprites()[_rand.Next(mapping.GetSprites().Count)];
-                }
-
-                return mapping.GetSprites()[0];
-            }
-
-            return null;
+            return miscItemSpriteMappings.Where(mapping => mapping.GetType() == ((MiscItem)item).GetMiscItemType()).Select(mapping => randomSprite ? mapping.GetSprites()[_rand.Next(mapping.GetSprites().Count)] : mapping.GetSprites()[0]).FirstOrDefault();
         }
 
         private Sprite GetSprite(IItem item, bool randomSprite)
         {
             foreach (var mapping in itemSpriteMappings.Where(mapping => mapping.GetType() == item.GetItemType()))
             {
-                if (randomSprite)
-                {
-                    return mapping.GetSprites()[_rand.Next(mapping.GetSprites().Count)];
-                }
+                if (item.GetItemType() != EItemType.Card)
+                    return randomSprite
+                        ? mapping.GetSprites()[_rand.Next(mapping.GetSprites().Count)]
+                        : mapping.GetSprites()[0];
+                if (!randomSprite) return mapping.GetSprites()[0];
+                var index = (int)((Card)item).GetValue() * 3 + _rand.Next(3);
+                return mapping.GetSprites()[index];
 
-                return mapping.GetSprites()[0];
             }
 
             return null;
