@@ -7,6 +7,7 @@ using GT.Items;
 using GT.Items.Blood;
 using GT.Items.Cards;
 using GT.Items.GoldenTimeMinutes;
+using GT.Quests;
 using UnityEngine;
 
 namespace GT.Characters
@@ -21,6 +22,7 @@ namespace GT.Characters
         private readonly Wallet _wallet = new Wallet();
         private readonly List<Blood> _bloods = new List<Blood>();
         private readonly Dictionary<IItem, int> _miscItems = new Dictionary<IItem, int>();
+        private readonly List<Quest> _quests = new List<Quest>();
         
         #endregion
         
@@ -187,6 +189,28 @@ namespace GT.Characters
             npc.GetBullied(this);
         }
         
+        #endregion
+        
+        // I DONT CARE ANYMORE
+        
+        #region Quests
+
+        public void StartQuest(Quest quest)
+        {
+            // Add quest to the quest list
+            _quests.Add(quest);
+        }
+
+        public List<Quest> GetStartedQuests()
+        {
+            return _quests;
+        }
+
+        public void CompleteQuest(Quest quest)
+        {
+            _quests.Remove(quest);
+        }
+
         #endregion
     }
 }

@@ -48,9 +48,10 @@ namespace GT.Quests
             return _rewards;
         }
 
-        public void Start()
+        public void Start(Player player)
         {
             _started = true;
+            player.StartQuest(this);
         }
 
         public EQuestType GetQuestType()
@@ -84,21 +85,7 @@ namespace GT.Quests
             }
         }
 
-        public override string ToString()
-        {
-            string result = "";
-            // Any other requirements
-            if (Requirements.Count > 0)
-            {
-                result += "Fetch: \n";
-                foreach (var requirement in Requirements)
-                {
-                    result += " - " + requirement.Key.ToString() + "\n";
-                }
-            }
-
-            return result;
-        }
+        public abstract string ToString();
 
         public string GetRequest()
         {

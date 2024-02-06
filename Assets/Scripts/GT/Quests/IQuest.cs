@@ -8,7 +8,7 @@ namespace GT.Quests
     {
         void Complete();
         bool Completed();
-        void Start();
+        void Start(Player player);
         bool Started();
         IReadOnlyDictionary<IItem, int> Rewards();
         bool MeetsRequirements(Player player);

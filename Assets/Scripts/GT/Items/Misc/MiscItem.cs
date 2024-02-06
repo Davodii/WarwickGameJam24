@@ -47,5 +47,14 @@ namespace GT.Items.Misc
         {
             return (int)_miscItemType * HashDispersionMultiplier;
         }
+
+        public override string ToString()
+        {
+            return _miscItemType switch
+            {
+                EMiscItemType.Rock => "Rock",
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
     }
 }

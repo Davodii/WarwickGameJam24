@@ -37,7 +37,7 @@ namespace NpcGen
         public GameObject GenerateNpc(string id, NpcSkinColour skinColour, NpcHairColour hairColour)
         {
             // Generate an NPC as per the requirements
-            GameObject npc = Instantiate(npcBasePrefab, Vector3.zero, transform.rotation);
+            GameObject npc = Instantiate(npcBasePrefab, transform.position, transform.rotation);
             
             // Get the NPC base behaviour
             CharacterBaseBehaviour baseBehaviour = npc.GetComponent<CharacterBaseBehaviour>();

@@ -205,7 +205,7 @@ namespace UI.Interactions
             } 
             else if (!_npc.GetQuest().Started())
             {
-                _npc.GetQuest().Start();
+                _npc.GetQuest().Start(_game.GetPlayer());
                 // Disable button if the player does not meet the requirements
                 if (!_npc.GetQuest().MeetsRequirements(_game.GetPlayer()))
                 {

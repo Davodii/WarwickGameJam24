@@ -28,7 +28,7 @@ namespace UI
             var invSlotIndex = 0;
 
             // Cards
-            for (int i = 0; i < (int)ECardValue._5; i++)
+            for (int i = 0; i <= (int)ECardValue._5; i++)
             {
                 int cardCount = _game.GetPlayer().NumberOfCard(new Card((ECardValue)i));
                 if (cardCount > 0)
