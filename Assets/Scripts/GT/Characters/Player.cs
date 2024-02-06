@@ -68,6 +68,16 @@ namespace GT.Characters
             // Remove Card from the player
             RemoveCard(card);
         }
+
+        public int DeckSize()
+        {
+            return _deck.Size();
+        }
+        
+        public Card TopCard()
+        {
+            return _deck.Top();
+        }
         
         public bool HasCard(Card card)
         {

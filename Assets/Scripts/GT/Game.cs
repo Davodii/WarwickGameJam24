@@ -23,7 +23,7 @@ namespace GT
         /// </code>
         /// </summary>
         /// <returns>Singleton game instance.</returns>
-        public static Game? GetInstance()
+        public static Game GetInstance()
         {
             if (_instance == null)
             {
@@ -51,6 +51,7 @@ namespace GT
 
         private int _day;
         private const int NumberOfDays = 5;
+        private bool _randomDeathOccurred = false;
 
         private IEvent? _event = null;
         
@@ -68,6 +69,16 @@ namespace GT
         #endregion
         
         #region DaySystem
+
+        public bool HasRandomDeathOccurred()
+        {
+            return _randomDeathOccurred;
+        }
+
+        public void RandomDeathOccurred()
+        {
+            _randomDeathOccurred = true;
+        }
 
         public int GetDay()
         {
@@ -108,6 +119,18 @@ namespace GT
             
             // Generate daily event
             GenerateEvent();
+
+            // daily event must be generated and not null after GenerateEvent()
+            if (_event == null)
+            {
+                throw new Exception("_event can't be null.");
+            }
+           
+            // perform consequence of random daily event
+            if (_event.WillHappen())
+            {
+                _event.Result(this);
+            }
 
             // increment day counter
             _day++;
