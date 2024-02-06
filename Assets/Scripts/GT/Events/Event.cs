@@ -13,9 +13,11 @@ namespace GT.Events
         private readonly int _generatedNumber;
         private readonly int _threshold;
         private readonly string _prompt;
+        protected readonly Random Rng;
 
         protected Event(Random rng, int threshold, string prompt)
         {
+            Rng = rng;
             _generatedNumber = rng.Next(0, 100);
             _threshold = threshold;
             _prompt = prompt;

@@ -61,6 +61,16 @@ namespace GT.Characters
         {
             teacher.GiveCard(card).Give(this);
         }
+
+        public int DeckSize()
+        {
+            return _deck.Size();
+        }
+        
+        public Card TopCard()
+        {
+            return _deck.Top();
+        }
         
         public bool HasCard(Card card)
         {

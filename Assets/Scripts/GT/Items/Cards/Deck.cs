@@ -15,6 +15,11 @@ namespace GT.Items.Cards
         // NOTE: you can change this to a fixed array, but... like... why??
         private readonly List<Card> _cards = new List<Card>();
 
+        public int Size()
+        {
+            return _cards.Count;
+        }
+        
         public void AddCard(Card card)
         {
             _cards.Add(card);
@@ -44,6 +49,16 @@ namespace GT.Items.Cards
         public int NumberOfCard(Card card)
         {
             return _cards.FindAll(x => x.Equals(card)).Count;
+        }
+
+        public Card Top()
+        {
+            if (!_cards.Any())
+            {
+                throw new Exception("Can't get top card in empty deck.");
+            }
+
+            return _cards.First();
         }
     }
 }
