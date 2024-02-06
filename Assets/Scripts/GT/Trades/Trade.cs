@@ -15,11 +15,13 @@ namespace GT.Trades
         // Price is the items the player needs to "give" for the trade
         private readonly IReadOnlyDictionary<IItem, int> _rewards;
         private readonly IReadOnlyDictionary<IItem, int> _requirements;
+        private bool _completed;
 
         public Trade(IReadOnlyDictionary<IItem, int> rewards, IReadOnlyDictionary<IItem, int> requirements)
         {
             _requirements = requirements;
             _rewards = rewards;
+            _completed = false;
         }
 
         /// <summary>
@@ -68,43 +70,40 @@ namespace GT.Trades
             });
         }
 
+        public bool Completed()
+        {
+            return _completed;
+        }
+
         public void AcceptTrade(Player player)
         {
-            // Add items in trade to the player
-            foreach (var pair in _rewards)
+            if (!_completed)
             {
-                IItem item = pair.Key;
-                int count = pair.Value;
-                for (int i = 0; i < count; i++)
+                // Add items in trade to the player
+                foreach (var pair in _rewards)
                 {
-                    item.Give(player);
+                    IItem item = pair.Key;
+                    int count = pair.Value;
+                    for (int i = 0; i < count; i++)
+                    {
+                        item.Give(player);
+                    }
+                }
+
+                // Remove items from player's inventory
+                foreach (var pair in _requirements)
+                {
+                    IItem item = pair.Key;
+                    int count = pair.Value;
+                    for (int i = 0; i < count; i++)
+                    {
+                        item.Remove(player);
+                    }
                 }
             }
-            
-            // Remove items from player's inventory
-            foreach (var pair in _requirements)
-            {
-                IItem item = pair.Key;
-                int count = pair.Value;
-                for (int i = 0; i < count; i++)
-                {
-                    item.Remove(player);
-                }
-            }
+
+            // Complete the trade
+            _completed = true;
         }
     }
 }
-
-// How to store trades:
-/*
- * Need to have item(s) for which the player trades
- * Could have a system where each item has a base "value"
- * This value can then be used to generate a request
- * E.g. Money has value 1, C1 has value 5 and C2 has value 20
- * This means that to trade for C2 one possible trade is 2 x C1 and 10 x Money
- * Based on the value of the items to trade for, a different attribute called
- * something like "merchantBahvaiour" can determine what to change trade value by:
- * Generous - 
- * Neutral  -
- * Stingy   -
- */

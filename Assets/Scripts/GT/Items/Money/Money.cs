@@ -62,5 +62,10 @@ namespace GT.Items.Money
         {
             return _money;
         }
+
+        public override string ToString()
+        {
+            return "£" + (_money / 100);
+        }
     }
 }

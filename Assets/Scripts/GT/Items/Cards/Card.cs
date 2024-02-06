@@ -48,7 +48,20 @@ namespace GT.Items.Cards
 
         public override int GetHashCode()
         {
-            return (int)GetItemType() * HashDispersionMultiplier;
+            return ((int)GetItemType() * HashDispersionMultiplier) + (int)_value;
+        }
+
+        public override string ToString()
+        {
+            return _value switch
+            {
+                ECardValue._1 => "Green Card",
+                ECardValue._2 => "Blue Card",
+                ECardValue._3 => "Purple Card",
+                ECardValue._4 => "Red Card",
+                ECardValue._5 => "Yellow Card",
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
     }
 }

@@ -41,11 +41,8 @@ namespace GT.Quests.Concrete
             foreach (Npc npc in _toBully)
             {
                 string bulliedName = npc.ToString();
-                result += "Bully " + bulliedName + "\n";
+                result +=  bulliedName + "\n";
             }
-            
-            // Get the base result
-            result += base.ToString();
             
             return result;
         }

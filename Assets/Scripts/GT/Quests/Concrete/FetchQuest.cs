@@ -46,5 +46,24 @@ namespace GT.Quests.Concrete
                 }
             });
         }
+
+        public override string ToString()
+        {
+            string result = "";
+            foreach (var requirement in Requirements)
+            {
+                if (requirement.Key.GetItemType() == EItemType.Money)
+                {
+                    result += "- " + requirement.Key.ToString() + "\n";
+                }
+                else
+                {
+                    result += "- " + requirement.Value + "x " + requirement.Key.ToString() + "\n";
+                }
+                
+            }
+
+            return result;
+        }
     }
 }

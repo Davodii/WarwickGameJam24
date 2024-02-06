@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using GT.Items;
 using UnityEngine;
 
-namespace UI
+namespace UI.SpriteManager
 {
     [Serializable]
     public class ItemToSprite
     {
         // contain information about 
-        [SerializeField] private List<Sprite> _sprites;
-        [SerializeField] private EItemType _type;
+        [SerializeField] private List<Sprite> sprites;
+        [SerializeField] private EItemType type;
 
         public List<Sprite> GetSprites()
         {
-            return _sprites.GetRange(0, _sprites.Count);
+            return sprites.GetRange(0, sprites.Count);
         }
 
-        public EItemType GetType()
+        public new EItemType GetType()
         {
-            return _type;
+            return type;
         }
     }
 }
