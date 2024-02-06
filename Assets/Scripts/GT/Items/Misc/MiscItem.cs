@@ -1,10 +1,12 @@
 using System;
+using System.Runtime.CompilerServices;
 using GT.Characters;
 
 namespace GT.Items.Misc
 {
     public sealed class MiscItem : IItem
     {
+        private const int HashDispersionMultiplier = 1000;
         private readonly EMiscItemType _miscItemType;
         
         public MiscItem(EMiscItemType miscItemType)
@@ -39,6 +41,11 @@ namespace GT.Items.Misc
 
             if (other.GetItemType() != EItemType.Misc) return false;
             return ((MiscItem)other).GetMiscItemType() == GetMiscItemType();
+        }
+
+        public override int GetHashCode()
+        {
+            return (int)_miscItemType * HashDispersionMultiplier;
         }
     }
 }

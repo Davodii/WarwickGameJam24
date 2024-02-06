@@ -6,6 +6,7 @@ using GT.Characters;
 using GT.Items.Blood;
 using GT.Items.Cards;
 using GT.Items.Money;
+using Debug = UnityEngine.Debug;
 
 namespace GT.Quests
 {
@@ -52,11 +53,6 @@ namespace GT.Quests
             _started = true;
         }
 
-        public IReadOnlyDictionary<IItem, int> GetRewards()
-        {
-            return _rewards;
-        }
-
         public EQuestType GetQuestType()
         {
             return QuestType;
@@ -64,9 +60,28 @@ namespace GT.Quests
 
         public abstract bool MeetsRequirements(Player player);
 
-        public void CompleteQuest()
+        public void CompleteQuest(Player player)
         {
             Complete();
+            
+            // Remove requirements from player
+            foreach (var requirement in Requirements)
+            {
+                for (int i = 0; i < requirement.Value; i++)
+                {
+                    requirement.Key.Remove(player);
+                }
+            }
+            
+            // Add rewards to player
+            foreach (var reward in _rewards)
+            {
+                for (int i = 0; i < reward.Value; i++)
+                {
+                    Debug.Log("Giving player " + reward.Key.ToString());
+                    reward.Key.Give(player);
+                }
+            }
         }
 
         public override string ToString()

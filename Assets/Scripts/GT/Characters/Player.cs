@@ -7,6 +7,7 @@ using GT.Items;
 using GT.Items.Blood;
 using GT.Items.Cards;
 using GT.Items.GoldenTimeMinutes;
+using UnityEngine;
 
 namespace GT.Characters
 {
@@ -59,7 +60,13 @@ namespace GT.Characters
         
         public void GiveCardToTeacher(Teacher teacher, Card card)
         {
-            teacher.GiveCard(card).Give(this);
+            // WHY??
+            // teacher.GiveCard(card).Give(this);
+            
+            // Changed to:
+            teacher.GiveCard(card);
+            // Remove Card from the player
+            RemoveCard(card);
         }
         
         public bool HasCard(Card card)
@@ -151,7 +158,9 @@ namespace GT.Characters
         
         public bool HasBullied(Npc npc)
         {
-            return _bloods.Any(b => b.GetOwner().ToString() == npc.ToString());
+            if(_bloods != null)
+                return _bloods.Any(b => b.GetOwner().ToString() == npc.ToString());
+            return false;
         }
         /// <summary>
         /// Bully another NPC. You should obtain some items from them,

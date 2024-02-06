@@ -8,5 +8,6 @@ namespace GT.Items
         EItemType GetItemType();
         void Give(Player player);
         void Remove(Player player);
+        int GetHashCode();
     }
 }

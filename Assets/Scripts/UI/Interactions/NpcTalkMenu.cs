@@ -1,10 +1,11 @@
+using GT;
 using GT.Characters.Npcs;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Random = System.Random;
 
-namespace UI.NpcInteractionMenu
+namespace UI.Interactions
 {
     public class NpcTalkMenu : MonoBehaviour
     {
@@ -12,24 +13,31 @@ namespace UI.NpcInteractionMenu
         // Enable the menu 
         // Change the text/properties of each element
 
-        [FormerlySerializedAs("name")] [Header("Text")] [SerializeField]
+        [Header("Text")] [SerializeField]
         private TMP_Text npcName;
 
         [SerializeField] private TMP_Text speech;
 
         [Header("Trading")] [SerializeField] private TradeSectionContextMenu tradeSection;
 
-        [FormerlySerializedAs("buttonSection")] [Header("Buttons")] [SerializeField]
-        private GameObject initialButtons;
-
+        [Header("Button Groups")] 
+        [SerializeField] private GameObject initialButtons;
         [SerializeField] private GameObject tradeButtons;
         [SerializeField] private GameObject questButtons;
+        [SerializeField] private GameObject background;
 
-        [Header("Misc.")] [SerializeField] private GameObject background;
+        [Header("Buttons")] 
+        [SerializeField] private Button questButton;
+        [SerializeField] private Button tradeButton;
+        [SerializeField] private Button bullyButton;
+        [SerializeField] private Button acceptQuestButton;
+        [SerializeField] private Button acceptTradeButton;
 
         // Privates
         private Npc _npc;
+        private Game _game;
         
+        //TODO: Make this betterer
         private readonly string[] _noTradeResponses = new[]
         {
             "Sorry, I don't have anything.",
@@ -58,6 +66,11 @@ namespace UI.NpcInteractionMenu
             initialButtons.SetActive(true);
             tradeButtons.SetActive(false);
             questButtons.SetActive(false);
+
+            // Disable/Enable the quest/trade/bully button
+            questButton.interactable = _npc.HasQuest() && !_npc.GetQuest().Completed();
+            tradeButton.interactable = _npc.HasTrade() && !_npc.GetTrade().Completed();
+            bullyButton.interactable = !_game.GetPlayer().HasBullied(_npc);
         }
 
         public void DisableMenu()
@@ -84,7 +97,7 @@ namespace UI.NpcInteractionMenu
             // Called externally by the "see trade" button
             
             // Check if there is no trade
-            if (!_npc.HasTrade())
+            if (!_npc.HasTrade() || _npc.GetTrade().Completed())
             {
                 Random rand = new Random();
                 speech.text = _noTradeResponses[rand.Next(_noTradeResponses.Length)];
@@ -100,8 +113,6 @@ namespace UI.NpcInteractionMenu
             tradeSection.gameObject.SetActive(true);
             speech.gameObject.SetActive(false);
             
-            //TODO: Create trade layout / items
-            
             // Add request items
             foreach (var pair in _npc.GetTrade().GetPrice())
             {
@@ -113,12 +124,22 @@ namespace UI.NpcInteractionMenu
                 tradeSection.AddReward(pair.Key, pair.Value);
             }
             
+            // Update trade button
+            acceptTradeButton.interactable = _npc.GetTrade().MeetsRequirements(_game.GetPlayer());
         }
 
         public void AcceptTrade()
         {
             // Check if can trade
             // I.e. if the player has the requirements for the trade
+            if(_npc.GetTrade().MeetsRequirements(_game.GetPlayer()) && !_npc.GetTrade().Completed())
+            {
+                // Accept the trade
+                // Update the trade button
+                acceptTradeButton.interactable = false;
+                
+                _npc.GetTrade().AcceptTrade(_game.GetPlayer());
+            }
         }
 
         public void Quest()
@@ -136,7 +157,7 @@ namespace UI.NpcInteractionMenu
             // Check if there is no quest
             // Check if there is no quest
             
-            if (!_npc.HasQuest())
+            if (!_npc.HasQuest() || _npc.GetQuest().Completed())
             {
                 Random rand = new Random();
                 speech.text = _noQuestResponses[rand.Next(_noQuestResponses.Length)];
@@ -146,17 +167,61 @@ namespace UI.NpcInteractionMenu
             // Update buttons
             initialButtons.SetActive(false);
             questButtons.SetActive(true);
+            acceptQuestButton.interactable = true;
+            var buttonText = acceptQuestButton.GetComponentInChildren<TMP_Text>();
+            buttonText.text = "Accept Quest";
+
+            if (_npc.GetQuest().Started())
+            {
+                // Change the accept quest text to "complete quest"
+                buttonText.text = "Complete Quest";
+                
+                // Disable button if the player does not meet requirements
+                if (!_npc.GetQuest().MeetsRequirements(_game.GetPlayer()))
+                {
+                    acceptQuestButton.interactable = false;
+                }
+            }
             
             // Show requirements
             speech.text = _npc.GetQuest().GetRequest();
-            
         }
 
         public void AcceptQuest()
         {
-            // Check if can complete quest
+            // Add the quest to the player if not added before
+            // return
             
-            
+            // Check if player has met requirements and complete quest
+            // remove requirements from the player
+            // add rewards to the player
+
+            var buttonText = acceptQuestButton.GetComponentInChildren<TMP_Text>();
+            buttonText.text = "Complete Quest";
+
+            if (_npc.GetQuest().Completed())
+            {
+                acceptQuestButton.interactable = false;
+            } 
+            else if (!_npc.GetQuest().Started())
+            {
+                _npc.GetQuest().Start();
+                // Disable button if the player does not meet the requirements
+                if (!_npc.GetQuest().MeetsRequirements(_game.GetPlayer()))
+                {
+                    acceptQuestButton.interactable = false;
+                }
+            }
+            else
+            {
+                if (_npc.GetQuest().MeetsRequirements(_game.GetPlayer()))
+                {
+                    // Add rewards to the player
+                    // Complete the quest
+                    _npc.GetQuest().CompleteQuest(_game.GetPlayer());
+                    acceptQuestButton.interactable = false;
+                }
+            }
         }
 
         public void Bully()
@@ -170,31 +235,26 @@ namespace UI.NpcInteractionMenu
             // This button should be removed if this kid has already been bullied
             
             // Bully the kid
+            _npc.GetBullied(_game.GetPlayer());
+            bullyButton.interactable = false;
+            speech.text = "<color=\"red\">WHAT THE HELL DID I DO TO YOU??</color>";
         }
 
         public void Back()
         {
-            // Go back to initial screen 
-            
-            // Update buttons
-            initialButtons.SetActive(true);
-            questButtons.SetActive(false);
-            tradeButtons.SetActive(false);
-            tradeSection.gameObject.SetActive(false);
-            
-            // Update text
-            speech.gameObject.SetActive(true);
-            speech.text = GenerateString();
-            
             // Delete any Trade icons generated
             foreach (var group in tradeSection.gameObject.GetComponentsInChildren<ItemUIGroup>())
             {
                 DestroyImmediate(group.gameObject);
             }
+            
+            EnableMenu();
         }
 
         public void Awake()
         {
+            _game = Game.GetInstance();
+            
             DisableMenu();
         }
 
@@ -217,8 +277,6 @@ namespace UI.NpcInteractionMenu
             npcName.text = _npc.ToString();
             //TODO: "Conversation dialogue" generation
             speech.text = GenerateString();
-            
-            
         }
         
         
